@@ -7,8 +7,14 @@ export default [
       { path: '/user', redirect: '/user/login' },
       { path: '/user/login', component: './User/Login' },
       { path: '/user/register', component: './User/Register' },
-      { path: '/user/register-result', component: './User/RegisterResult' },
-    ],
+      { path: '/user/register-result', component: './User/RegisterResult' }
+    ]
+  },
+  {
+    path: '/homepage',
+    name: 'homepage',
+    icon: 'home',
+    component: './home'
   },
   // app
   {
@@ -18,11 +24,13 @@ export default [
     authority: ['admin', 'user'],
     routes: [
       // dashboard
-      { path: '/', redirect: '/dashboard/analysis' },
-      {path: '/prototype',
-      name: 'prototype',
-      icon:'smile',
-      component: './prototype'},
+      { path: '/', redirect: '/homepage' },
+      {
+        path: '/prototype',
+        name: 'prototype',
+        icon: 'smile',
+        component: './prototype'
+      },
       {
         path: '/dashboard',
         name: 'dashboard',
@@ -31,19 +39,19 @@ export default [
           {
             path: '/dashboard/analysis',
             name: 'analysis',
-            component: './Dashboard/Analysis',
+            component: './Dashboard/Analysis'
           },
           {
             path: '/dashboard/monitor',
             name: 'monitor',
-            component: './Dashboard/Monitor',
+            component: './Dashboard/Monitor'
           },
           {
             path: '/dashboard/workplace',
             name: 'workplace',
-            component: './Dashboard/Workplace',
-          },
-        ],
+            component: './Dashboard/Workplace'
+          }
+        ]
       },
       // forms
       {
@@ -54,7 +62,7 @@ export default [
           {
             path: '/form/basic-form',
             name: 'basicform',
-            component: './Forms/BasicForm',
+            component: './Forms/BasicForm'
           },
           {
             path: '/form/step-form',
@@ -65,32 +73,32 @@ export default [
               {
                 path: '/form/step-form',
                 name: 'stepform',
-                redirect: '/form/step-form/info',
+                redirect: '/form/step-form/info'
               },
               {
                 path: '/form/step-form/info',
                 name: 'info',
-                component: './Forms/StepForm/Step1',
+                component: './Forms/StepForm/Step1'
               },
               {
                 path: '/form/step-form/confirm',
                 name: 'confirm',
-                component: './Forms/StepForm/Step2',
+                component: './Forms/StepForm/Step2'
               },
               {
                 path: '/form/step-form/result',
                 name: 'result',
-                component: './Forms/StepForm/Step3',
-              },
-            ],
+                component: './Forms/StepForm/Step3'
+              }
+            ]
           },
           {
             path: '/form/advanced-form',
             name: 'advancedform',
             authority: ['admin'],
-            component: './Forms/AdvancedForm',
-          },
-        ],
+            component: './Forms/AdvancedForm'
+          }
+        ]
       },
       // list
       {
@@ -101,17 +109,17 @@ export default [
           {
             path: '/list/table-list',
             name: 'searchtable',
-            component: './List/TableList',
+            component: './List/TableList'
           },
           {
             path: '/list/basic-list',
             name: 'basiclist',
-            component: './List/BasicList',
+            component: './List/BasicList'
           },
           {
             path: '/list/card-list',
             name: 'cardlist',
-            component: './List/CardList',
+            component: './List/CardList'
           },
           {
             path: '/list/search',
@@ -120,26 +128,26 @@ export default [
             routes: [
               {
                 path: '/list/search',
-                redirect: '/list/search/articles',
+                redirect: '/list/search/articles'
               },
               {
                 path: '/list/search/articles',
                 name: 'articles',
-                component: './List/Articles',
+                component: './List/Articles'
               },
               {
                 path: '/list/search/projects',
                 name: 'projects',
-                component: './List/Projects',
+                component: './List/Projects'
               },
               {
                 path: '/list/search/applications',
                 name: 'applications',
-                component: './List/Applications',
-              },
-            ],
-          },
-        ],
+                component: './List/Applications'
+              }
+            ]
+          }
+        ]
       },
       {
         path: '/profile',
@@ -150,15 +158,15 @@ export default [
           {
             path: '/profile/basic',
             name: 'basic',
-            component: './Profile/BasicProfile',
+            component: './Profile/BasicProfile'
           },
           {
             path: '/profile/advanced',
             name: 'advanced',
             authority: ['admin'],
-            component: './Profile/AdvancedProfile',
-          },
-        ],
+            component: './Profile/AdvancedProfile'
+          }
+        ]
       },
       {
         name: 'result',
@@ -169,10 +177,10 @@ export default [
           {
             path: '/result/success',
             name: 'success',
-            component: './Result/Success',
+            component: './Result/Success'
           },
-          { path: '/result/fail', name: 'fail', component: './Result/Error' },
-        ],
+          { path: '/result/fail', name: 'fail', component: './Result/Error' }
+        ]
       },
       {
         name: 'exception',
@@ -183,25 +191,25 @@ export default [
           {
             path: '/exception/403',
             name: 'not-permission',
-            component: './Exception/403',
+            component: './Exception/403'
           },
           {
             path: '/exception/404',
             name: 'not-find',
-            component: './Exception/404',
+            component: './Exception/404'
           },
           {
             path: '/exception/500',
             name: 'server-error',
-            component: './Exception/500',
+            component: './Exception/500'
           },
           {
             path: '/exception/trigger',
             name: 'trigger',
             hideInMenu: true,
-            component: './Exception/TriggerException',
-          },
-        ],
+            component: './Exception/TriggerException'
+          }
+        ]
       },
       {
         name: 'account',
@@ -215,21 +223,21 @@ export default [
             routes: [
               {
                 path: '/account/center',
-                redirect: '/account/center/articles',
+                redirect: '/account/center/articles'
               },
               {
                 path: '/account/center/articles',
-                component: './Account/Center/Articles',
+                component: './Account/Center/Articles'
               },
               {
                 path: '/account/center/applications',
-                component: './Account/Center/Applications',
+                component: './Account/Center/Applications'
               },
               {
                 path: '/account/center/projects',
-                component: './Account/Center/Projects',
-              },
-            ],
+                component: './Account/Center/Projects'
+              }
+            ]
           },
           {
             path: '/account/settings',
@@ -238,31 +246,31 @@ export default [
             routes: [
               {
                 path: '/account/settings',
-                redirect: '/account/settings/base',
+                redirect: '/account/settings/base'
               },
               {
                 path: '/account/settings/base',
-                component: './Account/Settings/BaseView',
+                component: './Account/Settings/BaseView'
               },
               {
                 path: '/account/settings/security',
-                component: './Account/Settings/SecurityView',
+                component: './Account/Settings/SecurityView'
               },
               {
                 path: '/account/settings/binding',
-                component: './Account/Settings/BindingView',
+                component: './Account/Settings/BindingView'
               },
               {
                 path: '/account/settings/notification',
-                component: './Account/Settings/NotificationView',
-              },
-            ],
-          },
-        ],
+                component: './Account/Settings/NotificationView'
+              }
+            ]
+          }
+        ]
       },
       {
-        component: '404',
-      },
-    ],
-  },
-];
+        component: '404'
+      }
+    ]
+  }
+]

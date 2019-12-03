@@ -2,35 +2,41 @@
 export default {
   'GET /DynamicMenu/getDynamicMenu': [
     // dashboard
-    { path: '/', redirect: '/dashboard/analysis' },
+    { path: '/', redirect: '/homepage' },
+    {
+      path: '/homepage',
+      name: 'homepage',
+      icon: 'home',
+      component: './home'
+    },
     {
       path: '/prototype',
       name: 'prototype',
       icon: 'smile',
       component: './prototype'
     },
-    {
-      path: '/dashboard',
-      name: 'dashboard',
-      icon: 'dashboard',
-      routes: [
-        {
-          path: '/dashboard/analysis',
-          name: 'analysis',
-          component: './Dashboard/Analysis'
-        },
-        {
-          path: '/dashboard/monitor',
-          name: 'monitor',
-          component: './Dashboard/Monitor'
-        },
-        {
-          path: '/dashboard/workplace',
-          name: 'workplace',
-          component: './Dashboard/Workplace'
-        }
-      ]
-    },
+    // {
+    //   path: '/dashboard',
+    //   name: 'dashboard',
+    //   icon: 'dashboard',
+    //   routes: [
+    //     {
+    //       path: '/dashboard/analysis',
+    //       name: 'analysis',
+    //       component: './Dashboard/Analysis'
+    //     },
+    //     {
+    //       path: '/dashboard/monitor',
+    //       name: 'monitor',
+    //       component: './Dashboard/Monitor'
+    //     },
+    //     {
+    //       path: '/dashboard/workplace',
+    //       name: 'workplace',
+    //       component: './Dashboard/Workplace'
+    //     }
+    //   ]
+    // },
     // forms
     {
       path: '/form',
