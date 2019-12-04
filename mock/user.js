@@ -2,7 +2,7 @@
 export default {
   // 支持值为 Object 和 Array
   'GET /api/currentUser': {
-    name: 'Serati Ma',
+    name: '设备管理员',
     avatar:
       'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
     userid: '00000001',
@@ -298,6 +298,16 @@ export default {
             { key: '8', name: '八号楼' }
           ]
         }
+      ]
+    })
+  },
+  'GET /api/query/allProject': (req, res) => {
+    res.send({
+      data: [
+        { projectId: '1', name: '三元朱项目' },
+        { projectId: '2', name: '水产养殖' },
+        { projectId: '3', name: '果蔬加工' },
+        { projectId: '4', name: '菜博会' }
       ]
     })
   }

@@ -71,6 +71,7 @@ export default {
   'component.noticeIcon.cleared': '清空了',
   'component.noticeIcon.empty': '暂无数据',
   'menu.home': '首页',
+  'menu.homepage': '首页',
   'menu.prototype':'数据查询',
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': '分析页',

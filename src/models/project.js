@@ -1,28 +1,43 @@
-import { queryProjectNotice } from '@/services/api';
-
+import { queryProjectNotice } from '@/services/api'
+import { queryAllProject } from '@/services/project'
 export default {
   namespace: 'project',
 
   state: {
     notice: [],
+
+    projectTotal:[]
   },
 
   effects: {
-    *fetchNotice(_, { call, put }) {
-      const response = yield call(queryProjectNotice);
+    * fetchNotice (_, { call, put }) {
+      const response = yield call(queryProjectNotice)
       yield put({
         type: 'saveNotice',
-        payload: Array.isArray(response) ? response : [],
-      });
+        payload: Array.isArray(response) ? response : []
+      })
     },
+    * fetchAllProject (_, { call, put }) {
+      const response = yield call(queryAllProject)
+      yield put({
+        type: 'saveAllProject',
+        payload: response
+      })
+    }
   },
 
   reducers: {
-    saveNotice(state, action) {
+    saveNotice (state, action) {
       return {
         ...state,
-        notice: action.payload,
-      };
+        notice: action.payload
+      }
     },
-  },
-};
+    saveAllProject (state, action) {
+      return {
+        ...state,
+        projectTotal: action.payload.data
+      }
+    },
+  }
+}

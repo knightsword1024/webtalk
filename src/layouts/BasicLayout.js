@@ -110,6 +110,7 @@ class BasicLayout extends React.PureComponent {
     // 请求动态显示
     dispatch({
       type: 'dynamicmenu/getDynamicmenu',
+      payload:{value:0}
     });
     this.renderRef = requestAnimationFrame(() => {
       this.setState({
@@ -293,7 +294,7 @@ class BasicLayout extends React.PureComponent {
             )}
           </ContainerQuery>
         </DocumentTitle>
-        {/* {this.renderSettingDrawer()} */}
+        {this.renderSettingDrawer()}
       </React.Fragment>
     );
   }
