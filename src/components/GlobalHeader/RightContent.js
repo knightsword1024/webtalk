@@ -17,6 +17,7 @@ import NoticeIcon from '../NoticeIcon'
 import HeaderSearch from '../HeaderSearch'
 import SelectLang from '../SelectLang'
 import ProjectSelect from '../ProjectSelect'
+import Alert from '../Alert'
 import styles from './index.less'
 
 export default class GlobalHeaderRight extends PureComponent {
@@ -98,12 +99,15 @@ export default class GlobalHeaderRight extends PureComponent {
 
     return (
       <div className={styles.right}>
-        <Row gutter={60}>
-          <Col span={10}>
+        <Row gutter={40}>
+          <Col span={7}>
             <ProjectSelect />
           </Col>
-          <Col span={12}>
-            <Dropdown overlay={menu}>
+          <Col span={8}>
+            <Alert />
+          </Col>
+          <Col span={9}>
+            <Dropdown overlay={menu}  placement='bottomCenter'>
               <span className={`${styles.action} ${styles.account}`}>
                 <Avatar
                   size='small'

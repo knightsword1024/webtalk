@@ -107,12 +107,12 @@ export default class SiderMenu extends PureComponent {
         theme={theme}
         className={siderClassName}
       >
-        <div className={styles.logo} id="logo">
+        {/* <div className={styles.logo} id="logo">
           <Link to="/">
             <img src={logo} alt="logo" />
             <h1>Ant Design Pro</h1>
           </Link>
-        </div>
+        </div> */}
         <BaseMenu
           {...this.props}
           mode="inline"
