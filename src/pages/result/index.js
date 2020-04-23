@@ -1,38 +1,39 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'antd';
 import style from './index.less';
-import EERr from './info/eerr';
-import COP from './info/cop';
-import WTFchw from './info/wtfchw';
-import Analysis from './info/analysis';
-export default class energyAnalysis extends Component {
+import LoadContrast from './info/loadContrast.js';
+import HistoryLook from './info/HistoryLook.js';
+import HistoryConsum from './info/HistoryConsum.js';
+import Card from './info/Card.js';
+
+export default class result extends Component {
   render() {
     return (
       <div className={style.all}>
         <div className={style.top}>
           <Row gutter={16}>
             <Col span={10}>
-              <div className={style.eerr}>
-                <EERr />
+              <div className={style.LoadContrast}>
+                <LoadContrast />
               </div>
             </Col>
             <Col span={10}>
-              <div className={style.card}>
-                <Analysis />
+              <div className={style.HistoryLook}>
+                <HistoryLook />
               </div>
             </Col>
           </Row>
         </div>
         <div className={style.buttom}>
           <Row gutter={16}>
-            <Col span={10}>
-              <div className={style.cop}>
-                <COP />
+            <Col span={11}>
+              <div className={style.HistoryConsum}>
+                <HistoryConsum />
               </div>
             </Col>
             <Col span={10}>
-              <div className={style.wtfchw}>
-                <WTFchw />
+              <div className={style.Card}>
+                <Card />
               </div>
             </Col>
           </Row>

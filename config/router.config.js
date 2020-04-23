@@ -2,13 +2,27 @@ export default [
   //
   {
     path: '/',
-    redirect: '/homepage',
+    redirect: '/result',
   },
   {
-    path: '/homepage',
-    name: 'homepage',
-    icon: 'home',
-    component: './home',
+    path: '/result',
+    name: 'result',
+    component: './result',
+  },
+  {
+    path: '/trace',
+    name: 'trace',
+    component: './trace',
+  },
+  {
+    path: '/energyConsumption',
+    name: 'energyConsumption',
+    component: './energyConsumption',
+  },
+  {
+    path: '/energyAnalysis',
+    name: 'energyAnalysis',
+    component: './energyAnalysis',
   },
   {
     component: '404',
