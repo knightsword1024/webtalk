@@ -11,7 +11,9 @@ export default class Trace extends Component {
         <div className={style.top}>
           <Detail />
         </div>
-        <div className={style.buttom}>{/* <ResponseCurve></ResponseCurve> */}</div>
+        <div className={style.buttom}>
+          <ResponseCurve />
+        </div>
       </div>
     );
   }

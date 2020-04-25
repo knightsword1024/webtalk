@@ -3,6 +3,38 @@
   margin-left: 20px;
 }
 
+.buttom {
+  margin-top: 10px;
+  margin-left: 20px;
+
+  :global {
+    .ant-select-selection {
+      width: 120px;
+    }
+
+    .ant-statistic {
+      border: black 2px solid;
+    }
+
+    .ant-statistic-title {
+      padding-top: 30px;
+      height: 90px;
+      color: black;
+      text-align: center;
+      font-size: 22px;
+    }
+
+    .ant-statistic-content {
+      height: 90px;
+      text-align: center;
+    }
+  }
+}
+
+.select {
+  width: 120px;
+}
+
 .form {
   :global {
     .ant-row {
@@ -10,6 +42,18 @@
 
       font-size: 20px;
       height: 22px;
+    }
+  }
+}
+
+.table {
+  :global {
+    tr {
+      height: 67px;
+    }
+
+    .ant-table-placeholder {
+      height: 298px;
     }
   }
 }

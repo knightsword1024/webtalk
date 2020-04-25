@@ -2,7 +2,12 @@ export default [
   //
   {
     path: '/',
-    redirect: '/result',
+    redirect: '/report',
+  },
+  {
+    path: '/report',
+    name: 'report',
+    component: './report',
   },
   {
     path: '/result',

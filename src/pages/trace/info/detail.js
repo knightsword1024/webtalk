@@ -86,11 +86,13 @@ export default class Detail extends Component {
             </Card>
           </Col>
           <Col span={10}>
-            <Table
-              rowKey={record => record.id}
-              columns={this.createColumn()}
-              //   dataSource={locationList}
-            />
+            <div className={style.table}>
+              <Table
+                rowKey={record => record.id}
+                columns={this.createColumn()}
+                //   dataSource={locationList}
+              />
+            </div>
           </Col>
         </Row>
       </div>
