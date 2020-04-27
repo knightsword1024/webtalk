@@ -140,10 +140,11 @@ export default class Detail extends Component {
                 });
               },
             }}
+            pagination={false}
             rowKey={record => record.id}
             columns={this.createColumn()}
             dataSource={data}
-            scroll={{ y: 105 }}
+            scroll={{ y: 167 }}
           />
         </Card>
       </div>

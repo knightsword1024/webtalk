@@ -19,7 +19,7 @@ export default class DayComPare extends Component {
     // dispatch({})
   };
   getLine = () => {
-    const showValue = '11';
+    const showValue = ['本月每日能耗', '上月每日能耗'];
     const xValue = [1, 2, 3, 4, 5, 6];
     const yValue = [10, 20, 30, 40, 50, 60];
     const unitValue = 's';
@@ -32,6 +32,9 @@ export default class DayComPare extends Component {
             backgroundColor: '#6a7985',
           },
         },
+      },
+      legend: {
+        data: showValue,
       },
       dataZoom: [
         {
@@ -68,7 +71,23 @@ export default class DayComPare extends Component {
       },
       series: [
         {
-          name: showValue,
+          name: showValue[0],
+          data: yValue,
+          type: 'line',
+          smooth: true,
+          areaStyle: {},
+          itemStyle: {
+            normal: {
+              color: '#4FC8FF',
+              lineStyle: {
+                width: 2,
+                type: 'solid', // 'dotted'虚线 'solid'实线
+              },
+            },
+          },
+        },
+        {
+          name: showValue[1],
           data: yValue,
           type: 'line',
           smooth: true,
@@ -87,32 +106,32 @@ export default class DayComPare extends Component {
     };
     return option;
   };
-  renderSimpleForm() {
-    const {} = this.props;
-    return (
-      <div style={{ marginLeft: 120 }}>
-        <Fragment>
-          <Row gutter={20}>
-            <Col span={4}>
-              <div className={style.select}>
-                <RangePicker onChange={this.onChangeDate} />
-              </div>
-            </Col>
-            <Col span={3}>
-              <div className={style.select}>
-                <Select placeholder="时间间隔" onChange={() => this.onChange} />
-              </div>
-            </Col>
-            <Col span={2}>
-              <Button type="primary" onClick={this.handleSubmit}>
-                查询
-              </Button>
-            </Col>
-          </Row>
-        </Fragment>
-      </div>
-    );
-  }
+  // renderSimpleForm() {
+  //   const {} = this.props;
+  //   return (
+  //     <div style={{ marginLeft: 120 }}>
+  //       <Fragment>
+  //         <Row gutter={20}>
+  //           <Col span={4}>
+  //             <div className={style.select}>
+  //               <RangePicker onChange={this.onChangeDate} />
+  //             </div>
+  //           </Col>
+  //           <Col span={3}>
+  //             <div className={style.select}>
+  //               <Select placeholder="时间间隔" onChange={() => this.onChange} />
+  //             </div>
+  //           </Col>
+  //           <Col span={2}>
+  //             <Button type="primary" onClick={this.handleSubmit}>
+  //               查询
+  //             </Button>
+  //           </Col>
+  //         </Row>
+  //       </Fragment>
+  //     </div>
+  //   );
+  // }
   handleSubmit = () => {
     const { dispatch } = this.props;
   };
@@ -129,11 +148,11 @@ export default class DayComPare extends Component {
     return (
       <div>
         <Card title="日用电量环比分析">
-          {this.renderSimpleForm()}
+          {/* {this.renderSimpleForm()} */}
           <ReactEcharts
             option={this.getLine()}
             theme="light"
-            style={{ height: '200px', width: '100%' }}
+            style={{ height: '240px', width: '100%' }}
           />
         </Card>
       </div>
