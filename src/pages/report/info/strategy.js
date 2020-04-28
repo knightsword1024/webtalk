@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Row, Col, Card, DatePicker, Button, Table, Form, Input } from 'antd';
+import { Row, Col, Card, DatePicker, Button, Table, Form, Input, Modal, Select } from 'antd';
 import style from './index.less';
+import { connect } from 'dva';
 
 const FormItem = Form.Item;
+const Option = Select.Option;
 const rowSelection = {
   onChange: (selectedRowKeys, selectedRows) => {
     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
@@ -45,11 +47,82 @@ const data = [
   },
 ];
 
+//编辑响应策略
+@connect(({ strategy }) => ({ strategy }))
+@Form.create()
+class CreateForm extends Component {
+  okHandle = e => {
+    const {
+      form,
+      handleModalVisible,
+      rowValue,
+      // dispatch
+    } = this.props;
+    form.validateFields((err, fieldsValue) => {
+      if (err) return;
+      const values = {
+        ...fieldsValue,
+      };
+      // dispatch({})
+      handleModalVisible(false, '');
+    });
+  };
+
+  render() {
+    const { form, rowValue, modalVisible, handleModalVisible } = this.props;
+    return (
+      <Modal
+        title={'请选择要设置的参数'}
+        visible={modalVisible}
+        onCancel={() => {
+          handleModalVisible(false, '');
+        }}
+        onOk={() => this.okHandle()}
+        destroyOnClose
+      >
+        {rowValue.key == 0 ? (
+          <div>
+            <FormItem label="办公" labelCol={{ span: 7 }} wrapperCol={{ span: 15 }}>
+              {form.getFieldDecorator('engineB')(<Select placeholder="请选择数量" />)}
+            </FormItem>
+            <FormItem label="商用" labelCol={{ span: 7 }} wrapperCol={{ span: 15 }}>
+              {form.getFieldDecorator('engineS')(<Select placeholder="请选择数量" />)}
+            </FormItem>
+          </div>
+        ) : (
+          <div />
+        )}
+        {rowValue.key == 1 ? (
+          <div>
+            <FormItem label="办公" labelCol={{ span: 7 }} wrapperCol={{ span: 15 }}>
+              {form.getFieldDecorator('outTemB')(<Select placeholder="请选择温度" />)}
+            </FormItem>
+            <FormItem label="商用" labelCol={{ span: 7 }} wrapperCol={{ span: 15 }}>
+              {form.getFieldDecorator('outTemS')(<Select placeholder="请选择温度" />)}
+            </FormItem>
+          </div>
+        ) : (
+          <div />
+        )}
+      </Modal>
+    );
+  }
+}
+
 export default class Detail extends Component {
   state = {
     value: 1,
     respondValue: 0,
     selectedRowKeys: [],
+    selectRow: [],
+    rowValue: [],
+    modalVisible: false,
+
+    engineB: 0,
+    engineS: 0,
+
+    outTemB: 0,
+    outTemS: 0,
   };
   createColumn() {
     return [
@@ -64,16 +137,28 @@ export default class Detail extends Component {
       },
       {
         title: '执行参数',
-        render: row => <a onClick={() => this.handleModalVisible(true, row, 'edit')}>编辑</a>,
+        render: row => <a onClick={() => this.handleModalVisible(true, row)}>编辑</a>,
         width: 100,
       },
     ];
   }
 
+  handleModalVisible = (state, rowValue) => {
+    this.setState({
+      modalVisible: !!state,
+      rowValue,
+    });
+  };
+
   render() {
-    const { value, respondValue, selectedRowKeys } = this.state;
+    const { value, respondValue, selectedRowKeys, selectRow, modalVisible, rowValue } = this.state;
+    const parentMethods = {
+      handleModalVisible: this.handleModalVisible,
+      // handleSearch: this.handleSearch,
+    };
     return (
       <div className={style.strategy}>
+        {console.log(selectedRowKeys)}
         <Card
           title={
             <div>
@@ -147,6 +232,9 @@ export default class Detail extends Component {
             scroll={{ y: 167 }}
           />
         </Card>
+        {modalVisible && (
+          <CreateForm modalVisible={modalVisible} rowValue={rowValue} {...parentMethods} />
+        )}
       </div>
     );
   }

@@ -8,8 +8,9 @@ export default {
   },
 
   effects: {
-    *fetchTableValue(_, { call, put }) {
-      const response = yield call(getTableValue);
+    *fetchTableValue({ payload }, { call, put }) {
+      const response = yield call(getTableValue, payload);
+      console.log(response);
       yield put({
         type: 'setTableValue',
         payload: response,
@@ -21,7 +22,7 @@ export default {
     setTableValue(state, action) {
       return {
         ...state,
-        tableValue: action.payload.data,
+        // tableValue: action.payload.data,
       };
     },
   },

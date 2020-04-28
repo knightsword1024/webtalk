@@ -1,5 +1,10 @@
 import request from '@/utils/request';
 
-export async function getTableValue() {
-  return request('/api/consumption/tablevalue');
+export async function getTableValue(params) {
+  return request('/talkClient', {
+    method: 'POST',
+    data: {
+      ...params,
+    },
+  });
 }

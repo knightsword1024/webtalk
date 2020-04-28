@@ -7,7 +7,7 @@ export default class LoadContrast extends Component {
     const { dispatch } = this.props;
     dispatch({
       type: 'consumption/fetchTableValue',
-      payload: {},
+      payload: { value: 0 },
     });
   };
   createColumn() {

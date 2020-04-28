@@ -8,7 +8,7 @@ const FormItem = Form.Item;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-@connect(({}) => ({}))
+@connect(consumption => consumption)
 export default class DayComPare extends Component {
   state = {
     date: [],
