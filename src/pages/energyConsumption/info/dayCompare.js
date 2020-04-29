@@ -19,9 +19,42 @@ export default class DayComPare extends Component {
     // dispatch({})
   };
   getLine = () => {
+    const {
+      consumption: { dayValue1, dayValue2 },
+    } = this.props;
     const showValue = ['本月每日能耗', '上月每日能耗'];
-    const xValue = [1, 2, 3, 4, 5, 6];
-    const yValue = [10, 20, 30, 40, 50, 60];
+    const xValue = [
+      '1号',
+      '2号',
+      '3号',
+      '4号',
+      '5号',
+      '6号',
+      '7号',
+      '8号',
+      '9号',
+      '10号',
+      '11号',
+      '12号',
+      '13号',
+      '14号',
+      '15号',
+      '16号',
+      '17号',
+      '18号',
+      '19号',
+      '20号',
+      '21号',
+      '22号',
+      '23号',
+      '24号',
+      '25号',
+      '26号',
+      '27号',
+      '28号',
+      '29号',
+      '30号',
+    ];
     const unitValue = 's';
     let option = {
       tooltip: {
@@ -72,7 +105,7 @@ export default class DayComPare extends Component {
       series: [
         {
           name: showValue[0],
-          data: yValue,
+          data: dayValue1,
           type: 'line',
           smooth: true,
           areaStyle: {},
@@ -88,13 +121,13 @@ export default class DayComPare extends Component {
         },
         {
           name: showValue[1],
-          data: yValue,
+          data: dayValue2,
           type: 'line',
           smooth: true,
           areaStyle: {},
           itemStyle: {
             normal: {
-              color: '#4FC8FF',
+              color: '#ff6a4f',
               lineStyle: {
                 width: 2,
                 type: 'solid', // 'dotted'虚线 'solid'实线

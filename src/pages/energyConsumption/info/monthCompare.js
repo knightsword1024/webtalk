@@ -19,10 +19,25 @@ export default class MonthComPare extends Component {
     // dispatch({})
   };
   getLine = () => {
+    const {
+      consumption: { monthValue1, monthValue2 },
+    } = this.props;
     const showValue = ['今年每月能耗', '去年每月能耗'];
-    const xValue = [1, 2, 3, 4, 5, 6];
-    const yValue = [10, 20, 30, 40, 50, 60];
-    const unitValue = 's';
+    const xValue = [
+      '1月',
+      '2月',
+      '3月',
+      '4月',
+      '5月',
+      '6月',
+      '7月',
+      '8月',
+      '9月',
+      '10月',
+      '11月',
+      '12月',
+    ];
+    const unitValue = 'kWh';
     let option = {
       tooltip: {
         trigger: 'axis',
@@ -72,11 +87,11 @@ export default class MonthComPare extends Component {
       series: [
         {
           name: showValue[0],
-          data: yValue,
+          data: monthValue1,
           type: 'bar',
           itemStyle: {
             normal: {
-              color: '#4F12EE',
+              color: '#4FC8FF',
               lineStyle: {
                 width: 2,
                 type: 'solid', // 'dotted'虚线 'solid'实线
@@ -86,11 +101,11 @@ export default class MonthComPare extends Component {
         },
         {
           name: showValue[1],
-          data: yValue,
+          data: monthValue2,
           type: 'bar',
           itemStyle: {
             normal: {
-              color: '#4FC8FF',
+              color: '#ff6a4f',
               lineStyle: {
                 width: 2,
                 type: 'solid', // 'dotted'虚线 'solid'实线

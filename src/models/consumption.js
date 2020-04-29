@@ -10,6 +10,12 @@ export default {
       { deviceName: '冷冻水泵', dayElectricity: 60, monthElectricity: 60, proportion: 25 },
       { deviceName: '冷却塔风机', dayElectricity: 60, monthElectricity: 60, proportion: 25 },
     ],
+
+    dayValue1: [],
+    dayValue2: [],
+
+    monthValue1: [],
+    monthValue2: [],
   },
 
   effects: {

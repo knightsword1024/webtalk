@@ -6,9 +6,13 @@ import style from './index.less';
 export default class LoadContrast extends Component {
   componentWillMount = () => {
     const { dispatch } = this.props;
+    var today = new Date();
+    var date1 = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var date2 = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() + 1);
+
     dispatch({
       type: 'consumption/fetchTableValue',
-      payload: { startTime: '2019-01-01', endTime: '2019-01-02' },
+      payload: { startTime: date1, endTime: date2 },
     });
   };
   createColumn() {

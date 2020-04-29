@@ -74,7 +74,6 @@ class CreateForm extends Component {
 
   render() {
     const { form, rowValue, modalVisible, handleModalVisible, onChangeModalValue } = this.props;
-    const that = this;
     return (
       <Modal
         title={'请选择要设置的参数'}
@@ -92,7 +91,9 @@ class CreateForm extends Component {
                 <div className={style.select}>
                   <Select
                     placeholder="请选择数量"
-                    onChange={that.onChangeModalValue.bind(that, 'engineB')}
+                    onChange={event => {
+                      onChangeModalValue('engineB', event);
+                    }}
                   >
                     <Option key={1} value={1}>
                       1
@@ -319,74 +320,85 @@ export default class Detail extends Component {
   }
 
   onChangeModalValue = (key, value) => {
-    console.log(key);
-    console.log(value);
     switch (key) {
       case 'engineB': {
         this.setState({
           engineB: value,
         });
+        break;
       }
 
       case 'engineS': {
         this.setState({
           engineS: value,
         });
+        break;
       }
       case 'outTemB': {
         this.setState({
           outTemB: value,
         });
+        break;
       }
       case 'outTemS': {
         this.setState({
           outTemS: value,
         });
+        break;
       }
       case 'presetTime': {
         this.setState({
           presetTime: value,
         });
+        break;
       }
       case 'presetOutTemB': {
         this.setState({
           presetOutTemB: value,
         });
+        break;
       }
       case 'presetOutTemS': {
         this.setState({
           presetOutTemS: value,
         });
+        break;
       }
       case 'presetEndTemB': {
         this.setState({
           presetEndTemB: value,
         });
+        break;
       }
       case 'presetEndTemS': {
         this.setState({
           presetEndTemS: value,
         });
+        break;
       }
       case 'newTrand': {
         this.setState({
           newTrand: value,
         });
+        break;
       }
       case 'endTemB': {
         this.setState({
           endTemB: value,
         });
+        break;
       }
       case 'endTemS': {
         this.setState({
           endTemS: value,
         });
+        break;
       }
       case 'lighting': {
         this.setState({
           lighting: value,
         });
+        break;
       }
     }
   };
@@ -419,7 +431,8 @@ export default class Detail extends Component {
     var sendValue = {};
     for (let i of selectedRowKeys) {
       if (i == 0) {
-        sendValue = { ...engineB, ...engineS };
+        sendValue = { engineB: engineB, engineS: engineS };
+        console.log(sendValue);
       }
       if (i == 1) {
         sendValue = { ...outTemB, ...outTemS };
