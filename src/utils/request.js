@@ -62,22 +62,10 @@ const request = extend({
 
 // request拦截器, 改变url 或 options.
 request.interceptors.request.use(async (url, options) => {
-  let token = localStorage.getItem('token');
-  if (token) {
-    const data = {
-      ...options.data,
-      token: token,
-    };
-    return {
-      url: url,
-      options: { ...options, data: data },
-    };
-  } else {
-    return {
-      url: url,
-      options: { ...options },
-    };
-  }
+  return {
+    url: url,
+    options: { ...options },
+  };
 });
 
 // response拦截器, 处理response

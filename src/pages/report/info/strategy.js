@@ -1,47 +1,47 @@
 import React, { Component } from 'react';
-import { Row, Col, Card, DatePicker, Button, Table, Form, Input, Modal, Select } from 'antd';
+import { Row, Col, Card, DatePicker, Button, Table, Form, Input, Modal, Select, Radio } from 'antd';
 import style from './index.less';
 import { connect } from 'dva';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-  },
-  getCheckboxProps: record => ({
-    disabled: record.name === 'Disabled User', // Column configuration not to be checked
-    name: record.name,
-  }),
-};
+// const rowSelection = {
+//   onChange: (selectedRowKeys, selectedRows) => {
+//     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
+//   },
+//   getCheckboxProps: record => ({
+//     disabled: record.name === 'Disabled User', // Column configuration not to be checked
+//     name: record.name,
+//   }),
+// }
 const data = [
   {
-    key: '1',
+    key: '0',
     strategyId: '策略一',
     strategyName: '关停主机和对应的冷却系统',
   },
   {
-    key: '2',
+    key: '1',
     strategyId: '策略二',
     strategyName: '提高冷水机组的出水温度',
   },
   {
-    key: '3',
+    key: '2',
     strategyId: '策略三',
     strategyName: '预制冷',
   },
   {
-    key: '4',
+    key: '3',
     strategyId: '策略四',
     strategyName: '关闭新风系统',
   },
   {
-    key: '5',
+    key: '4',
     strategyId: '策略五',
     strategyName: '提高空调末端设定温度',
   },
   {
-    key: '6',
+    key: '5',
     strategyId: '策略六',
     strategyName: '关闭公共照明',
   },
@@ -51,6 +51,10 @@ const data = [
 @connect(({ strategy }) => ({ strategy }))
 @Form.create()
 class CreateForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
   okHandle = e => {
     const {
       form,
@@ -69,7 +73,8 @@ class CreateForm extends Component {
   };
 
   render() {
-    const { form, rowValue, modalVisible, handleModalVisible } = this.props;
+    const { form, rowValue, modalVisible, handleModalVisible, onChangeModalValue } = this.props;
+    const that = this;
     return (
       <Modal
         title={'请选择要设置的参数'}
@@ -82,11 +87,37 @@ class CreateForm extends Component {
       >
         {rowValue.key == 0 ? (
           <div>
-            <FormItem label="办公" labelCol={{ span: 7 }} wrapperCol={{ span: 15 }}>
-              {form.getFieldDecorator('engineB')(<Select placeholder="请选择数量" />)}
+            <FormItem label="办公" labelCol={{ span: 9 }} wrapperCol={{ span: 12 }}>
+              {form.getFieldDecorator('engineB')(
+                <div className={style.select}>
+                  <Select
+                    placeholder="请选择数量"
+                    onChange={that.onChangeModalValue.bind(that, 'engineB')}
+                  >
+                    <Option key={1} value={1}>
+                      1
+                    </Option>
+                    <Option key={2} value={2}>
+                      2
+                    </Option>
+                    <Option key={3} value={3}>
+                      3
+                    </Option>
+                  </Select>
+                  <span>台</span>
+                </div>
+              )}
             </FormItem>
-            <FormItem label="商用" labelCol={{ span: 7 }} wrapperCol={{ span: 15 }}>
-              {form.getFieldDecorator('engineS')(<Select placeholder="请选择数量" />)}
+            <FormItem label="商用" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+              {form.getFieldDecorator('engineS')(
+                <div className={style.select}>
+                  <Select
+                    placeholder="请选择数量"
+                    // onChange={this.onChangeModalValue.bind(this, 'engineS')}
+                  />
+                  <span>台</span>
+                </div>
+              )}
             </FormItem>
           </div>
         ) : (
@@ -94,12 +125,143 @@ class CreateForm extends Component {
         )}
         {rowValue.key == 1 ? (
           <div>
-            <FormItem label="办公" labelCol={{ span: 7 }} wrapperCol={{ span: 15 }}>
-              {form.getFieldDecorator('outTemB')(<Select placeholder="请选择温度" />)}
+            <FormItem label="办公" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+              {form.getFieldDecorator('outTemB')(
+                <div className={style.select}>
+                  <Select
+                    placeholder="请选择温度"
+                    // onChange={this.onChangeModalValue.bind(this, 'outTemB')}
+                  />
+                  <span>℃</span>
+                </div>
+              )}
             </FormItem>
-            <FormItem label="商用" labelCol={{ span: 7 }} wrapperCol={{ span: 15 }}>
-              {form.getFieldDecorator('outTemS')(<Select placeholder="请选择温度" />)}
+            <FormItem label="商用" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+              {form.getFieldDecorator('outTemS')(
+                <div className={style.select}>
+                  <Select
+                    placeholder="请选择温度"
+                    // onChange={this.onChangeModalValue.bind(this, 'outTemS')}
+                  />
+                  <span>℃</span>
+                </div>
+              )}
             </FormItem>
+          </div>
+        ) : (
+          <div />
+        )}
+        {rowValue.key == 2 ? (
+          <div>
+            <FormItem label="预制冷时间" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+              {form.getFieldDecorator('presetTime')(
+                <div className={style.input}>
+                  <Input
+                    placeholder="请输入时间"
+                    // onChange={this.onChangeModalValue.bind(this, 'presetTime')}
+                  />
+                  <span>分钟</span>
+                </div>
+              )}
+            </FormItem>
+            <div style={{ marginLeft: 95 }}>提高出水温度</div>
+            <FormItem label="办公" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+              {form.getFieldDecorator('presetOutTemB')(
+                <div className={style.select}>
+                  <Select
+                    placeholder="请选择温度"
+                    // onChange={this.onChangeModalValue.bind(this, 'presetOutTemB')}
+                  />
+                  <span>℃</span>
+                </div>
+              )}
+            </FormItem>
+            <FormItem label="商用" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+              {form.getFieldDecorator('presetOutTemS')(
+                <div className={style.select}>
+                  <Select
+                    placeholder="请选择温度"
+                    // onChange={this.onChangeModalValue.bind(this, 'presetOutTemS')}
+                  />
+                  <span>℃</span>
+                </div>
+              )}
+            </FormItem>
+            <div style={{ marginLeft: 95 }}>末端设定温度</div>
+            <FormItem label="办公" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+              {form.getFieldDecorator('presetEndTemB')(
+                <div className={style.select}>
+                  <Select
+                    placeholder="请选择温度"
+                    // onChange={this.onChangeModalValue.bind(this, 'presetEndTemB')}
+                  />
+                  <span>℃</span>
+                </div>
+              )}
+            </FormItem>
+            <FormItem label="商用" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+              {form.getFieldDecorator('presetEndTemS')(
+                <div className={style.select}>
+                  <Select
+                    placeholder="请选择温度"
+                    // onChange={this.onChangeModalValue.bind(this, 'presetEndTemS')}
+                  />
+                  <span>℃</span>
+                </div>
+              )}
+            </FormItem>
+          </div>
+        ) : (
+          <div />
+        )}
+        {rowValue.key == 3 ? (
+          <Radio.Group
+            value={1}
+            // onChange={this.onChangeModalValue.bind(this, 'newTrand')}
+          >
+            <Radio value={1}>办公</Radio>
+            <Radio value={2}>商用</Radio>
+          </Radio.Group>
+        ) : (
+          <div />
+        )}
+        {rowValue.key == 4 ? (
+          <div>
+            <FormItem label="办公" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+              {form.getFieldDecorator('endTemB')(
+                <div className={style.select}>
+                  <Select
+                    placeholder="请选择温度"
+                    // onChange={this.onChangeModalValue.bind(this, 'endTemB')}
+                  />
+                  <span>℃</span>
+                </div>
+              )}
+            </FormItem>
+            <FormItem label="商用" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+              {form.getFieldDecorator('endTemS')(
+                <div className={style.select}>
+                  <Select
+                    placeholder="请选择温度"
+                    // onChange={this.onChangeModalValue.bind(this, 'endTemS')}
+                  />
+                  <span>℃</span>
+                </div>
+              )}
+            </FormItem>
+          </div>
+        ) : (
+          <div />
+        )}
+        {rowValue.key == 5 ? (
+          <div>
+            <Radio.Group
+              value={1}
+              // onChange={this.onChangeModalValue.bind(this, 'lighting')}
+            >
+              <Radio value={1}>办公</Radio>
+              <Radio value={2}>商用</Radio>
+            </Radio.Group>
           </div>
         ) : (
           <div />
@@ -123,6 +285,19 @@ export default class Detail extends Component {
 
     outTemB: 0,
     outTemS: 0,
+
+    presetTime: 0,
+    presetOutTemB: 0,
+    presetOutTemS: 0,
+    presetEndTemB: 0,
+    presetEndTemS: 0,
+
+    newTrand: 0,
+
+    endTemB: 0,
+    endTemS: 0,
+
+    lighting: 0,
   };
   createColumn() {
     return [
@@ -143,6 +318,79 @@ export default class Detail extends Component {
     ];
   }
 
+  onChangeModalValue = (key, value) => {
+    console.log(key);
+    console.log(value);
+    switch (key) {
+      case 'engineB': {
+        this.setState({
+          engineB: value,
+        });
+      }
+
+      case 'engineS': {
+        this.setState({
+          engineS: value,
+        });
+      }
+      case 'outTemB': {
+        this.setState({
+          outTemB: value,
+        });
+      }
+      case 'outTemS': {
+        this.setState({
+          outTemS: value,
+        });
+      }
+      case 'presetTime': {
+        this.setState({
+          presetTime: value,
+        });
+      }
+      case 'presetOutTemB': {
+        this.setState({
+          presetOutTemB: value,
+        });
+      }
+      case 'presetOutTemS': {
+        this.setState({
+          presetOutTemS: value,
+        });
+      }
+      case 'presetEndTemB': {
+        this.setState({
+          presetEndTemB: value,
+        });
+      }
+      case 'presetEndTemS': {
+        this.setState({
+          presetEndTemS: value,
+        });
+      }
+      case 'newTrand': {
+        this.setState({
+          newTrand: value,
+        });
+      }
+      case 'endTemB': {
+        this.setState({
+          endTemB: value,
+        });
+      }
+      case 'endTemS': {
+        this.setState({
+          endTemS: value,
+        });
+      }
+      case 'lighting': {
+        this.setState({
+          lighting: value,
+        });
+      }
+    }
+  };
+
   handleModalVisible = (state, rowValue) => {
     this.setState({
       modalVisible: !!state,
@@ -150,15 +398,63 @@ export default class Detail extends Component {
     });
   };
 
+  handleCalculate = () => {
+    const {
+      selectedRowKeys,
+      engineB,
+      engineS,
+      outTemB,
+      outTemS,
+      presetTime,
+      presetOutTemB,
+      presetOutTemS,
+      presetEndTemB,
+      presetEndTemS,
+      newTrand,
+      endTemB,
+      endTemS,
+      lighting,
+    } = this.state;
+    const { dispatch } = this.props;
+    var sendValue = {};
+    for (let i of selectedRowKeys) {
+      if (i == 0) {
+        sendValue = { ...engineB, ...engineS };
+      }
+      if (i == 1) {
+        sendValue = { ...outTemB, ...outTemS };
+      }
+      if (i == 2) {
+        sendValue = {
+          ...presetTime,
+          ...presetOutTemB,
+          ...presetOutTemS,
+          ...presetEndTemB,
+          ...presetEndTemS,
+        };
+      }
+      if (i == 3) {
+        sendValue = { ...newTrand };
+      }
+      if (i == 4) {
+        sendValue = { ...endTemB, ...endTemS };
+      }
+      if (i == 5) {
+        sendValue = { ...lighting };
+      }
+      console.log(sendValue);
+      sendValue = {};
+    }
+  };
+
   render() {
     const { value, respondValue, selectedRowKeys, selectRow, modalVisible, rowValue } = this.state;
     const parentMethods = {
       handleModalVisible: this.handleModalVisible,
-      // handleSearch: this.handleSearch,
+      onChangeModalValue: this.onChangeModalValue,
     };
     return (
       <div className={style.strategy}>
-        {console.log(selectedRowKeys)}
         <Card
           title={
             <div>
@@ -194,7 +490,9 @@ export default class Detail extends Component {
                   <span>例如:12:00-13:00</span>
                 </Col>
                 <Col span={5}>
-                  <Button type="primary">计算</Button>
+                  <Button type="primary" onClick={this.handleCalculate.bind(this)}>
+                    计算
+                  </Button>
                 </Col>
               </Row>
             </Form.Item>

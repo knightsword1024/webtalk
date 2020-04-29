@@ -2,7 +2,7 @@ export default [
   //
   {
     path: '/',
-    redirect: '/energyConsumption',
+    redirect: '/report',
   },
   {
     path: '/report',
