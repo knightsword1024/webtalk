@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Card, Table } from 'antd';
 import { connect } from 'dva';
+import style from './index.less';
 @connect(consumption => consumption)
 export default class LoadContrast extends Component {
   componentWillMount = () => {
     const { dispatch } = this.props;
     dispatch({
       type: 'consumption/fetchTableValue',
-      payload: { value: 0 },
+      payload: { startTime: '2019-01-01', endTime: '2019-01-02' },
     });
   };
   createColumn() {
@@ -18,15 +19,25 @@ export default class LoadContrast extends Component {
       },
       {
         title: '当日用电',
-        dataIndex: 'dayElectricity',
+        render: row => (
+          <div>
+            {row.dayElectricity}
+            kWh
+          </div>
+        ),
       },
       {
         title: '当月用电',
-        dataIndex: 'monthElectricity',
+        render: row => (
+          <div>
+            {row.monthElectricity}
+            kWh
+          </div>
+        ),
       },
       {
         title: '占比',
-        dataIndex: 'proportion',
+        render: row => <div>{row.proportion}%</div>,
       },
     ];
   }
@@ -36,12 +47,13 @@ export default class LoadContrast extends Component {
       consumption: { tableValue },
     } = this.props;
     return (
-      <div>
+      <div className={style.card}>
         <Card title="分类负荷对比" bodyStyle={{ height: 280 }}>
           <Table
             rowKey={record => record.id}
             columns={this.createColumn()}
             dataSource={tableValue}
+            pagination={false}
           />
         </Card>
       </div>

@@ -4,13 +4,17 @@ export default {
   namespace: 'consumption',
 
   state: {
-    tableValue: [],
+    tableValue: [
+      { deviceName: '冷水机组', dayElectricity: 60, monthElectricity: 60, proportion: 25 },
+      { deviceName: '冷冻水泵', dayElectricity: 60, monthElectricity: 60, proportion: 25 },
+      { deviceName: '冷冻水泵', dayElectricity: 60, monthElectricity: 60, proportion: 25 },
+      { deviceName: '冷却塔风机', dayElectricity: 60, monthElectricity: 60, proportion: 25 },
+    ],
   },
 
   effects: {
     *fetchTableValue({ payload }, { call, put }) {
       const response = yield call(getTableValue, payload);
-      console.log(response);
       yield put({
         type: 'setTableValue',
         payload: response,
