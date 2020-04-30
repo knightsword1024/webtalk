@@ -1,4 +1,4 @@
-import { getCardValue } from '@/services/dynamicMenu';
+import { getOrderValue } from '@/services/dynamicMenu';
 
 export default {
   namespace: 'response',
@@ -14,6 +14,9 @@ export default {
   effects: {
     *fetchOrderValue({ payload }, { call, put }) {
       const response = yield call(getOrderValue, payload);
+    },
+    *pushReportValue({ payload }, { call, put }) {
+      const response = yield call(pushReportValue, payload);
       yield put({
         type: 'setOrderValue',
         payload: response,

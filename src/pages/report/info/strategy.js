@@ -72,7 +72,18 @@ class CreateForm extends Component {
       modalVisible,
       handleModalVisible,
       onChangeModalValue,
+      engineB,
+      engineS,
+      outTemB,
+      outTemS,
+      presetTime,
+      presetOutTemB,
+      presetOutTemS,
+      presetEndTemB,
+      presetEndTemS,
       newTrand,
+      endTemB,
+      endTemS,
       lighting,
     } = this.props;
     return (
@@ -92,6 +103,7 @@ class CreateForm extends Component {
                 <div className={style.select}>
                   <Select
                     placeholder="请选择数量"
+                    defaultValue={engineB}
                     onChange={event => {
                       onChangeModalValue('engineB', event);
                     }}
@@ -115,6 +127,7 @@ class CreateForm extends Component {
                 <div className={style.select}>
                   <Select
                     placeholder="请选择数量"
+                    defaultValue={engineS}
                     onChange={event => {
                       onChangeModalValue('engineS', event);
                     }}
@@ -147,6 +160,7 @@ class CreateForm extends Component {
                 <div className={style.select}>
                   <Select
                     placeholder="请选择温度"
+                    defaultValue={outTemB}
                     onChange={event => {
                       onChangeModalValue('outTemB', event);
                     }}
@@ -179,6 +193,7 @@ class CreateForm extends Component {
                 <div className={style.select}>
                   <Select
                     placeholder="请选择温度"
+                    defaultValue={outTemS}
                     onChange={event => {
                       onChangeModalValue('outTemS', event);
                     }}
@@ -217,6 +232,7 @@ class CreateForm extends Component {
                 <div className={style.select}>
                   <Select
                     placeholder="请选择时间"
+                    defaultValue={presetTime}
                     onChange={event => {
                       onChangeModalValue('presetTime', event);
                     }}
@@ -241,28 +257,30 @@ class CreateForm extends Component {
                 <div className={style.select}>
                   <Select
                     placeholder="请选择温度"
+                    defaultValue={presetOutTemB}
                     onChange={event => {
                       onChangeModalValue('presetOutTemB', event);
                     }}
-                  />
-                  <Option key={1} value={7}>
-                    7
-                  </Option>
-                  <Option key={2} value={8}>
-                    8
-                  </Option>
-                  <Option key={3} value={9}>
-                    9
-                  </Option>
-                  <Option key={4} value={10}>
-                    10
-                  </Option>
-                  <Option key={5} value={11}>
-                    11
-                  </Option>
-                  <Option key={6} value={12}>
-                    12
-                  </Option>
+                  >
+                    <Option key={4} value={7}>
+                      7
+                    </Option>
+                    <Option key={5} value={8}>
+                      8
+                    </Option>
+                    <Option key={6} value={9}>
+                      9
+                    </Option>
+                    <Option key={7} value={10}>
+                      10
+                    </Option>
+                    <Option key={8} value={11}>
+                      11
+                    </Option>
+                    <Option key={9} value={12}>
+                      12
+                    </Option>
+                  </Select>
                   <span>℃</span>
                 </div>
               )}
@@ -272,28 +290,30 @@ class CreateForm extends Component {
                 <div className={style.select}>
                   <Select
                     placeholder="请选择温度"
+                    defaultValue={presetOutTemS}
                     onChange={event => {
                       onChangeModalValue('presetOutTemS', event);
                     }}
-                  />
-                  <Option key={1} value={7}>
-                    7
-                  </Option>
-                  <Option key={2} value={8}>
-                    8
-                  </Option>
-                  <Option key={3} value={9}>
-                    9
-                  </Option>
-                  <Option key={4} value={10}>
-                    10
-                  </Option>
-                  <Option key={5} value={11}>
-                    11
-                  </Option>
-                  <Option key={6} value={12}>
-                    12
-                  </Option>
+                  >
+                    <Option key={1} value={7}>
+                      7
+                    </Option>
+                    <Option key={2} value={8}>
+                      8
+                    </Option>
+                    <Option key={3} value={9}>
+                      9
+                    </Option>
+                    <Option key={4} value={10}>
+                      10
+                    </Option>
+                    <Option key={5} value={11}>
+                      11
+                    </Option>
+                    <Option key={6} value={12}>
+                      12
+                    </Option>
+                  </Select>
                   <span>℃</span>
                 </div>
               )}
@@ -304,31 +324,33 @@ class CreateForm extends Component {
                 <div className={style.select}>
                   <Select
                     placeholder="请选择温度"
+                    defaultValue={presetEndTemB}
                     onChange={event => {
                       onChangeModalValue('presetEndTemB', event);
                     }}
-                  />
-                  <Option key={1} value={22}>
-                    22
-                  </Option>
-                  <Option key={2} value={23}>
-                    23
-                  </Option>
-                  <Option key={3} value={24}>
-                    24
-                  </Option>
-                  <Option key={4} value={25}>
-                    25
-                  </Option>
-                  <Option key={5} value={26}>
-                    26
-                  </Option>
-                  <Option key={6} value={27}>
-                    27
-                  </Option>
-                  <Option key={6} value={28}>
-                    28
-                  </Option>
+                  >
+                    <Option key={1} value={22}>
+                      22
+                    </Option>
+                    <Option key={2} value={23}>
+                      23
+                    </Option>
+                    <Option key={3} value={24}>
+                      24
+                    </Option>
+                    <Option key={4} value={25}>
+                      25
+                    </Option>
+                    <Option key={5} value={26}>
+                      26
+                    </Option>
+                    <Option key={6} value={27}>
+                      27
+                    </Option>
+                    <Option key={6} value={28}>
+                      28
+                    </Option>
+                  </Select>
                   <span>℃</span>
                 </div>
               )}
@@ -338,31 +360,33 @@ class CreateForm extends Component {
                 <div className={style.select}>
                   <Select
                     placeholder="请选择温度"
+                    defaultValue={presetEndTemS}
                     onChange={event => {
                       onChangeModalValue('presetEndTemS', event);
                     }}
-                  />
-                  <Option key={1} value={22}>
-                    22
-                  </Option>
-                  <Option key={2} value={23}>
-                    23
-                  </Option>
-                  <Option key={3} value={24}>
-                    24
-                  </Option>
-                  <Option key={4} value={25}>
-                    25
-                  </Option>
-                  <Option key={5} value={26}>
-                    26
-                  </Option>
-                  <Option key={6} value={27}>
-                    27
-                  </Option>
-                  <Option key={6} value={28}>
-                    28
-                  </Option>
+                  >
+                    <Option key={1} value={22}>
+                      22
+                    </Option>
+                    <Option key={2} value={23}>
+                      23
+                    </Option>
+                    <Option key={3} value={24}>
+                      24
+                    </Option>
+                    <Option key={4} value={25}>
+                      25
+                    </Option>
+                    <Option key={5} value={26}>
+                      26
+                    </Option>
+                    <Option key={6} value={27}>
+                      27
+                    </Option>
+                    <Option key={6} value={28}>
+                      28
+                    </Option>
+                  </Select>
                   <span>℃</span>
                 </div>
               )}
@@ -391,6 +415,7 @@ class CreateForm extends Component {
                 <div className={style.select}>
                   <Select
                     placeholder="请选择温度"
+                    defaultValue={endTemB}
                     onChange={event => {
                       onChangeModalValue('endTemB', event);
                     }}
@@ -425,6 +450,7 @@ class CreateForm extends Component {
                 <div className={style.select}>
                   <Select
                     placeholder="请选择温度"
+                    defaultValue={endTemS}
                     onChange={event => {
                       onChangeModalValue('endTemS', event);
                     }}
@@ -553,7 +579,6 @@ export default class Detail extends Component {
         break;
       }
       case 'presetTime': {
-        console.log(value);
         this.setState({
           presetTime: value,
         });
@@ -708,7 +733,18 @@ export default class Detail extends Component {
       selectRow,
       modalVisible,
       rowValue,
+      engineB,
+      engineS,
+      outTemB,
+      outTemS,
+      presetTime,
+      presetOutTemB,
+      presetOutTemS,
+      presetEndTemB,
+      presetEndTemS,
       newTrand,
+      endTemB,
+      endTemS,
       lighting,
     } = this.state;
     const parentMethods = {
@@ -793,6 +829,17 @@ export default class Detail extends Component {
           <CreateForm
             modalVisible={modalVisible}
             rowValue={rowValue}
+            engineB={engineB}
+            engineS={engineS}
+            outTemB={outTemB}
+            outTemS={outTemS}
+            presetTime={presetTime}
+            presetOutTemB={presetOutTemB}
+            presetOutTemS={presetOutTemS}
+            presetEndTemB={presetEndTemB}
+            presetEndTemS={presetEndTemS}
+            endTemB={endTemB}
+            endTemS={endTemS}
             newTrand={newTrand}
             lighting={lighting}
             {...parentMethods}
