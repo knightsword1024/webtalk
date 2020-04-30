@@ -7,3 +7,17 @@ export async function getTableValue(params) {
     data: params,
   });
 }
+
+export async function getDayValue(params) {
+  return request('/talkClient/dryl', {
+    method: 'POST',
+    data: params,
+  });
+}
+
+export async function getMonthValue(params) {
+  return request('/talkClient/dryl', {
+    method: 'POST',
+    data: params,
+  });
+}

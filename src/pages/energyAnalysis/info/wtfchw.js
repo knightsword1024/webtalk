@@ -3,26 +3,36 @@ import { Card, Row, Col, Form, Select, Button, DatePicker } from 'antd';
 import { connect } from 'dva';
 import ReactEcharts from 'echarts-for-react';
 import style from './index.less';
+import moment from 'moment';
 
 const FormItem = Form.Item;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-@connect(({}) => ({}))
+@connect(({ analysis }) => ({ analysis }))
 export default class Wtfchw extends Component {
   state = {
     date: [],
     time: '',
   };
-  componentDidMount = () => {
+  componentWillMount = () => {
     const { dispatch } = this.props;
-    // dispatch({})
+    var date1 = moment().format('YYYY-MM-DD') + ' 00:00:00';
+    var date2 =
+      moment()
+        .subtract('days', 30)
+        .format('YYYY-MM-DD') + ' 00:00:00';
+    dispatch({
+      type: 'analysis/fetchWTFchwValue',
+      payload: { startTime: date2, endTime: date1 },
+    });
   };
   getLine = () => {
-    const showValue = '11';
-    const xValue = [1, 2, 3, 4, 5, 6];
-    const yValue = [10, 20, 30, 40, 50, 60];
-    const unitValue = 's';
+    const {
+      analysis: { WTFchwxValue, WTFchwyValue },
+    } = this.props;
+    const showValue = 'WTFchw';
+    const unitValue = '';
     let option = {
       tooltip: {
         trigger: 'axis',
@@ -55,7 +65,7 @@ export default class Wtfchw extends Component {
       xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: xValue,
+        data: WTFchwxValue,
       },
       yAxis: {
         type: 'value',
@@ -69,7 +79,7 @@ export default class Wtfchw extends Component {
       series: [
         {
           name: showValue,
-          data: yValue,
+          data: WTFchwyValue,
           type: 'line',
           smooth: true,
           areaStyle: {},
@@ -97,11 +107,11 @@ export default class Wtfchw extends Component {
               <RangePicker onChange={this.onChangeDate} />
             </div>
           </Col>
-          <Col span={6}>
+          {/* <Col span={6}>
             <div className={style.select}>
               <Select placeholder="时间间隔" onChange={() => this.onChange} />
             </div>
-          </Col>
+          </Col> */}
           <Col span={4}>
             <Button type="primary" onClick={this.handleSubmit}>
               查询

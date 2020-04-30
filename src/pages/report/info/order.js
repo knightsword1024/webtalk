@@ -1,36 +1,38 @@
 import React, { Component } from 'react';
 import { Row, Col, Card, DatePicker, Button, Table, Form } from 'antd';
 import style from './index.less';
+import { connect } from 'dva';
 
 const FormItem = Form.Item;
 
+@connect(response => response)
 export default class order extends Component {
-  state = {
-    value: 1,
-  };
+  state = {};
 
   render() {
-    const { value } = this.state;
+    const {
+      response: { responseType, responseMode, responseStartTime, responsePower, responseTime },
+    } = this.props;
     return (
       <div>
         <Card title="电网指令">
           <div className={style.form}>
             <Form labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} name="basic">
               <Form.Item label="响应类型" name="响应类型">
-                {value}
+                {responseType}
               </Form.Item>
               <Form.Item label="响应方式" name="响应方式">
-                {value}
+                {responseMode}
               </Form.Item>
               <Form.Item label="响应开始时间" name="响应开始时间">
-                {value}
+                {responseStartTime}
               </Form.Item>
               <Form.Item label="响应功率" name="响应功率">
-                {value}
+                {responsePower}
                 kW
               </Form.Item>
               <Form.Item label="响应时间" name="响应时间">
-                {value}
+                {responseTime}
                 分钟
               </Form.Item>
             </Form>

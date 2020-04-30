@@ -2,14 +2,21 @@ import React, { Component } from 'react';
 import { Card, Table } from 'antd';
 import { connect } from 'dva';
 import style from './index.less';
+import moment from 'moment';
+
+// let statusPassTime = moment(parseInt(entity.statusPassTime)).format('YYYY-MM-DD') //let 格式化后的日期 = moment(parseInt(“日期的字符串”)).format('YYYY-MM-DD');
+
 @connect(consumption => consumption)
 export default class LoadContrast extends Component {
   componentWillMount = () => {
     const { dispatch } = this.props;
     var today = new Date();
-    var date1 = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    var date2 = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() + 1);
 
+    var date1 = moment().format('YYYY-MM-DD') + ' 00:00:00';
+    var date2 =
+      moment()
+        .add('days', 1)
+        .format('YYYY-MM-DD') + ' 00:00:00';
     dispatch({
       type: 'consumption/fetchTableValue',
       payload: { startTime: date1, endTime: date2 },

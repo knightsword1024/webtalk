@@ -3,6 +3,7 @@ import { Card, Row, Col, Form, Select, Button, DatePicker } from 'antd';
 import { connect } from 'dva';
 import ReactEcharts from 'echarts-for-react';
 import style from './index.less';
+import moment from 'moment';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -16,7 +17,17 @@ export default class MonthComPare extends Component {
   };
   componentWillMount = () => {
     const { dispatch } = this.props;
-    // dispatch({})
+    var date1 = moment().format('YYYY-MM') + '-01 00:00:00';
+    var date2 =
+      moment()
+        .add('months', 1)
+        .format('YYYY-MM') + '-01 00:00:00';
+    console.log(date1);
+    console.log(date2);
+    dispatch({
+      type: 'consumption/fetchMonthValue',
+      payload: { startTime: date1, endTime: date2 },
+    });
   };
   getLine = () => {
     const {

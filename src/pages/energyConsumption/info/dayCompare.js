@@ -3,6 +3,7 @@ import { Card, Row, Col, Form, Select, Button, DatePicker } from 'antd';
 import { connect } from 'dva';
 import ReactEcharts from 'echarts-for-react';
 import style from './index.less';
+import moment from 'moment';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -10,13 +11,18 @@ const { RangePicker } = DatePicker;
 
 @connect(consumption => consumption)
 export default class DayComPare extends Component {
-  state = {
-    date: [],
-    time: '',
-  };
-  componentDidMount = () => {
+  state = {};
+  componentWillMount = () => {
     const { dispatch } = this.props;
-    // dispatch({})
+    var date1 = moment().format('YYYY-MM-DD') + ' 00:00:00';
+    var date2 =
+      moment()
+        .add('days', 1)
+        .format('YYYY-MM-DD') + ' 00:00:00';
+    dispatch({
+      type: 'consumption/fetchDayValue',
+      payload: { startTime: date1, endTime: date2 },
+    });
   };
   getLine = () => {
     const {
@@ -54,6 +60,7 @@ export default class DayComPare extends Component {
       '28号',
       '29号',
       '30号',
+      '31号',
     ];
     const unitValue = 's';
     let option = {

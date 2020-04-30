@@ -3,12 +3,15 @@ import { Card, DatePicker, Button, Form, Radio, Input, Row, Col } from 'antd';
 import style from './index.less';
 
 const FormItem = Form.Item;
+const { RangePicker } = DatePicker;
 
 export default class apear extends Component {
   state = {
     value: 1,
     radioValue: 1,
     inputValue: '',
+    startTime: '',
+    endTime: '',
   };
   onChangeRadio = e => {
     this.setState({
@@ -18,6 +21,14 @@ export default class apear extends Component {
   onChangeInput = e => {
     this.setState({
       inputValue: e.target.value,
+    });
+  };
+
+  onChangeStartTime = (value, dateString) => {
+    console.log(dateString);
+    this.setState({
+      startTime: dateString[0],
+      endTime: dateString[1],
     });
   };
   render() {
@@ -40,14 +51,12 @@ export default class apear extends Component {
               </Form.Item>
               <Form.Item label="响应开始时间" name="响应开始时间">
                 <Row gutter={10}>
-                  <Col span={8}>
-                    <DatePicker />
-                  </Col>
-                  <Col span={8}>
-                    <Input placeholder="请输入时间" />
-                  </Col>
-                  <Col span={8}>
-                    <span>例如:12:00-13:00</span>
+                  <Col span={16}>
+                    <RangePicker
+                      showTime={{ format: 'HH:mm:ss' }}
+                      format="YYYY-MM-DD HH:mm:ss"
+                      onChange={this.onChangeStartTime}
+                    />
                   </Col>
                 </Row>
               </Form.Item>
