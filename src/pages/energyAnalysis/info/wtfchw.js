@@ -29,9 +29,8 @@ export default class Wtfchw extends Component {
   };
   getLine = () => {
     const {
-      analysis: { WTFchwxValue, WTFchwyValue },
+      analysis: { WTFchwxValue, WTFchwyValueOffice, WTFchwyValueBusi },
     } = this.props;
-    const showValue = 'WTFchw';
     const unitValue = '';
     let option = {
       tooltip: {
@@ -78,8 +77,24 @@ export default class Wtfchw extends Component {
       },
       series: [
         {
-          name: showValue,
-          data: WTFchwyValue,
+          name: '办公WTFchw',
+          data: WTFchwyValueOffice,
+          type: 'line',
+          smooth: true,
+          areaStyle: {},
+          itemStyle: {
+            normal: {
+              color: '#4FC8FF',
+              lineStyle: {
+                width: 2,
+                type: 'solid', // 'dotted'虚线 'solid'实线
+              },
+            },
+          },
+        },
+        {
+          name: '商业WTFchw',
+          data: WTFchwyValueBusi,
           type: 'line',
           smooth: true,
           areaStyle: {},

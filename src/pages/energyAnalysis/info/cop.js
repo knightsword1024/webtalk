@@ -8,10 +8,23 @@ import moment from 'moment';
 const FormItem = Form.Item;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
+const deviceName = {
+  C_6001_AV_0000: '办公1#机组',
+  C_6001_AV_0001: '办公2#机组',
+  C_6001_AV_0002: '办公3#机组',
+  C_6001_AV_0003: '商业1#机组',
+  C_6001_AV_0004: '商业2#机组',
+  C_6001_AV_0005: '商业3#机组',
+  C_6001_AV_0006: '商业4#机组',
+};
 
 @connect(({ analysis }) => ({ analysis }))
 export default class Cop extends Component {
-  state = {};
+  state = {
+    classify: 1,
+    startTime: '',
+    endTime: '',
+  };
   componentWillMount = () => {
     const { dispatch } = this.props;
     var date1 = moment().format('YYYY-MM-DD') + ' 00:00:00';
@@ -21,7 +34,7 @@ export default class Cop extends Component {
         .format('YYYY-MM-DD') + ' 00:00:00';
     dispatch({
       type: 'analysis/fetchCOPValue',
-      payload: { startTime: date2, endTime: date1 },
+      payload: { startTime: date2, endTime: date1, classify: 1 },
     });
   };
   getLine = () => {
@@ -30,6 +43,24 @@ export default class Cop extends Component {
     } = this.props;
     const showValue = 'COP';
     const unitValue = '';
+    var seriesValue = [];
+    for (let i in COPyValue) {
+      seriesValue.push({
+        name: deviceName[COPyValue[i].key],
+        data: COPyValue[i].value,
+        type: 'line',
+        smooth: true,
+        areaStyle: {},
+        itemStyle: {
+          normal: {
+            lineStyle: {
+              width: 2,
+              type: 'solid', // 'dotted'虚线 'solid'实线
+            },
+          },
+        },
+      });
+    }
     let option = {
       tooltip: {
         trigger: 'axis',
@@ -73,29 +104,19 @@ export default class Cop extends Component {
           formatter: `{value}${unitValue}`,
         },
       },
-      series: [
-        {
-          name: showValue,
-          data: COPyValue,
-          type: 'line',
-          smooth: true,
-          areaStyle: {},
-          itemStyle: {
-            normal: {
-              color: '#4FC8FF',
-              lineStyle: {
-                width: 2,
-                type: 'solid', // 'dotted'虚线 'solid'实线
-              },
-            },
-          },
-        },
-      ],
+      series: seriesValue,
     };
     return option;
   };
+
+  onChange = value => {
+    this.setState({
+      classify: value,
+    });
+  };
+
   renderSimpleForm() {
-    const {} = this.props;
+    const { classify } = this.state;
     return (
       <Fragment>
         <Row gutter={20}>
@@ -106,7 +127,14 @@ export default class Cop extends Component {
           </Col>
           <Col span={6}>
             <div className={style.select}>
-              <Select placeholder="办公/商用" onChange={() => this.onChange} />
+              <Select placeholder="办公/商用" onChange={this.onChange} defaultValue={classify}>
+                <Option key={1} value={1}>
+                  办公
+                </Option>
+                <Option key={2} value={2}>
+                  商用
+                </Option>
+              </Select>
             </div>
           </Col>
           <Col span={4}>
@@ -120,20 +148,20 @@ export default class Cop extends Component {
   }
   handleSubmit = () => {
     const { dispatch } = this.props;
+    const { startTime, endTime, classify } = this.state;
+    dispatch({
+      type: 'analysis/fetchCOPValue',
+      payload: { startTime: startTime, endTime: endTime, classify: classify },
+    });
   };
 
   onChangeDate = (date, dataString) => {
-    const { dispatch } = this.props;
-    console.log(dataString);
     this.setState({
-      date: dateString,
+      startTime: dataString[0] + '00:00:00',
+      endTime: dataString[1] + '00:00:00',
     });
   };
-  onChange = (key, value) => {
-    const { dispatch } = this.props;
-    this.setState({});
-    // dispatch({})
-  };
+
   render() {
     return (
       <div>

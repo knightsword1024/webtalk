@@ -62,7 +62,7 @@ export default class DayComPare extends Component {
       '30号',
       '31号',
     ];
-    const unitValue = 's';
+    const unitValue = 'kWh';
     let option = {
       tooltip: {
         trigger: 'axis',

@@ -25,9 +25,8 @@ export default class EERr extends Component {
     });
   };
   getLine = () => {
-    const showValue = 'EERr';
     const {
-      analysis: { EERrxValue, EERryValue },
+      analysis: { EERrxValue, EERryValueBusi, EERryValueOffice },
     } = this.props;
     const unitValue = '';
     let option = {
@@ -75,8 +74,24 @@ export default class EERr extends Component {
       },
       series: [
         {
-          name: showValue,
-          data: EERryValue,
+          name: '商用EERr',
+          data: EERryValueBusi,
+          type: 'line',
+          smooth: true,
+          areaStyle: {},
+          itemStyle: {
+            normal: {
+              color: '#4FC8FF',
+              lineStyle: {
+                width: 2,
+                type: 'solid', // 'dotted'虚线 'solid'实线
+              },
+            },
+          },
+        },
+        {
+          name: '办公EERr',
+          data: EERryValueOffice,
           type: 'line',
           smooth: true,
           areaStyle: {},

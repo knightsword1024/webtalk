@@ -40,11 +40,12 @@ export default class LoadContrast extends Component {
           radius: '90%',
           center: ['50%', '50%'],
           data: [
-            { value: 335, name: '直接访问' },
-            { value: 310, name: '邮件营销' },
-            { value: 274, name: '联盟广告' },
-            { value: 235, name: '视频广告' },
-            { value: 400, name: '搜索引擎' },
+            { value: 335, name: '策略一' },
+            { value: 310, name: '策略二' },
+            { value: 274, name: '策略三' },
+            { value: 235, name: '策略四' },
+            { value: 400, name: '策略五' },
+            { value: 500, name: '策略六' },
           ].sort(function(a, b) {
             return a.value - b.value;
           }),

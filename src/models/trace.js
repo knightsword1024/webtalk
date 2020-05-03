@@ -4,7 +4,7 @@ export default {
   namespace: 'trace',
 
   state: {
-    tableValue,
+    tableValue: [],
   },
 
   effects: {

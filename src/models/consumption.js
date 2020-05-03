@@ -4,12 +4,7 @@ export default {
   namespace: 'consumption',
 
   state: {
-    tableValue: [
-      { deviceName: '冷水机组', dayElectricity: 60, monthElectricity: 60, proportion: 25 },
-      { deviceName: '冷冻水泵', dayElectricity: 60, monthElectricity: 60, proportion: 25 },
-      { deviceName: '冷冻水泵', dayElectricity: 60, monthElectricity: 60, proportion: 25 },
-      { deviceName: '冷却塔风机', dayElectricity: 60, monthElectricity: 60, proportion: 25 },
-    ],
+    tableValue: [],
 
     dayValue1: [],
     dayValue2: [],
@@ -46,19 +41,21 @@ export default {
     setTableValue(state, action) {
       return {
         ...state,
-        // tableValue: action.payload.data,
+        tableValue: action.payload.result,
       };
     },
     setDayValue(state, action) {
       return {
         ...state,
-        // tableValue: action.payload.data,
+        dayValue1: action.payload.result.dayValue1,
+        dayValue2: action.payload.result.dayValue2,
       };
     },
     setMonthValue(state, action) {
       return {
         ...state,
-        // tableValue: action.payload.data,
+        monthValue1: action.payload.result.monthValue1,
+        monthValue2: action.payload.result.monthValue2,
       };
     },
   },

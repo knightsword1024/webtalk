@@ -22,8 +22,7 @@ export default class MonthComPare extends Component {
       moment()
         .add('months', 1)
         .format('YYYY-MM') + '-01 00:00:00';
-    console.log(date1);
-    console.log(date2);
+
     dispatch({
       type: 'consumption/fetchMonthValue',
       payload: { startTime: date1, endTime: date2 },

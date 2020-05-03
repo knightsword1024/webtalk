@@ -1,4 +1,4 @@
-import { getEERrValue, getCOPValue, getWTFchwValue, getCardValue } from '@/services/dynamicMenu';
+import { getEERrValue, getCOPValue, getWTFchwValue, getCardValue } from '@/services/analysis';
 
 export default {
   namespace: 'analysis',
@@ -12,13 +12,15 @@ export default {
     WTFchwS: 0,
 
     EERrxValue: [],
-    EERryValue: [],
+    EERryValueBusi: [],
+    EERryValueOffice: [],
 
-    COPxValue: [],
-    COPyValue: [],
+    COPxValue: [1, 2],
+    COPyValue: [{ key: 'C_6001_AV_0000', value: [1, 2] }, { key: 'C_6001_AV_0001', value: [2, 4] }],
 
     WTFchwxValue: [],
-    WTFchwyValue: [],
+    WTFchwyValueOffice: [],
+    WTFchwyValueBusi: [],
   },
 
   effects: {
@@ -56,7 +58,9 @@ export default {
     setEERrValue(state, action) {
       return {
         ...state,
-        // tableValue: action.payload.data,
+        EERrxValue: action.payload.result.EERrxValue,
+        EERryValueBusi: action.payload.result.EERryValueBusi,
+        EERryValueOffice: action.payload.result.EERryValueOffice,
       };
     },
     setCOPValue(state, action) {
@@ -68,13 +72,20 @@ export default {
     setWTFchwValue(state, action) {
       return {
         ...state,
-        // tableValue: action.payload.data,
+        WTFchwxValue: action.payload.result.WTFchwxValue,
+        WTFchwyValueBusi: action.payload.result.WTFchwyValueBusi,
+        WTFchwyValueOffice: action.payload.result.WTFchwyValueOffice,
       };
     },
     setCardValue(state, action) {
       return {
         ...state,
-        // tableValue: action.payload.data,
+        EERrB: action.payload.result.EERrB,
+        EERrS: action.payload.result.EERrS,
+        COPB: action.payload.result.COPB,
+        COPS: action.payload.result.COPS,
+        WTFchwB: action.payload.result.WTFchwB,
+        WTFchwS: action.payload.result.WTFchwS,
       };
     },
   },
