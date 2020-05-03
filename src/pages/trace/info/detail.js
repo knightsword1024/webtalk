@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
 import { Row, Col, Card, DatePicker, Button, Table, Form } from 'antd';
 import style from './index.less';
+import { connect } from 'dva';
 
 const FormItem = Form.Item;
 
+@connect(trace => trace)
 export default class Detail extends Component {
   state = {
     value: 1,
   };
+  componentWillMount = () => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'trace/fetchTableValue',
+      payload: {},
+    });
+  };
+  component;
   createColumn() {
     return [
       {
