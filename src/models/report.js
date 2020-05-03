@@ -1,4 +1,4 @@
-import { getOrderValue } from '@/services/dynamicMenu';
+import { getOrderValue, pushReportValue, getBaseValue } from '@/services/report';
 
 export default {
   namespace: 'response',
@@ -9,16 +9,30 @@ export default {
     responseStartTime: '', //响应开始时间
     responsePower: 300, //响应功率
     responseTime: 60, //响应时长
+
+    aveValue: 0,
+    maxValue: 0,
+    basePowerxValue: [],
+    basePoweryValue: [],
   },
 
   effects: {
     *fetchOrderValue({ payload }, { call, put }) {
       const response = yield call(getOrderValue, payload);
-    },
-    *pushReportValue({ payload }, { call, put }) {
-      const response = yield call(pushReportValue, payload);
       yield put({
         type: 'setOrderValue',
+        payload: response,
+      });
+    },
+
+    *pushReportValue({ payload }, { call, put }) {
+      const response = yield call(pushReportValue, payload);
+    },
+
+    *fetchBaseValue({ payload }, { call, put }) {
+      const response = yield call(getBaseValue, payload);
+      yield put({
+        type: 'setBaseValue',
         payload: response,
       });
     },
@@ -26,6 +40,12 @@ export default {
 
   reducers: {
     setOrderValue(state, action) {
+      return {
+        ...state,
+        // tableValue: action.payload.data,
+      };
+    },
+    setBaseValue(state, action) {
       return {
         ...state,
         // tableValue: action.payload.data,

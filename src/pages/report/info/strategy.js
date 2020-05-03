@@ -41,7 +41,7 @@ const data = [
 ];
 
 //编辑响应策略
-@connect(({ strategy }) => ({ strategy }))
+@connect(({ response }) => ({ response }))
 @Form.create()
 class CreateForm extends Component {
   constructor(props) {
@@ -504,6 +504,7 @@ class CreateForm extends Component {
   }
 }
 
+@connect(({ response }) => ({ response }))
 export default class Detail extends Component {
   state = {
     value: 1,
@@ -512,6 +513,8 @@ export default class Detail extends Component {
     selectRow: [],
     rowValue: [],
     modalVisible: false,
+    modalExeVisible: false,
+    exePower: 0,
 
     engineB: 0,
     engineS: 0,
@@ -725,6 +728,28 @@ export default class Detail extends Component {
     console.log(dateString);
   };
 
+  handleSubmit = () => {
+    const { exePower } = this.state;
+    const { dispatch } = this.props;
+    if (exePower == 1) {
+      return Modal.confirm({
+        title: `确定提交响应策略吗？`,
+        cancelText: '取消',
+        okText: '确定',
+        onOk: () => {
+          // dispatch({
+          // })
+        },
+      });
+    } else {
+      return Modal.confirm({
+        title: `需求响应能力已关闭`,
+        cancelText: '取消',
+        okText: '确定',
+      });
+    }
+  };
+
   render() {
     const {
       value,
@@ -803,7 +828,9 @@ export default class Detail extends Component {
                   />
                 </Col>
                 <Col span={5}>
-                  <Button type="primary">执行</Button>
+                  <Button type="primary" onClick={this.handleSubmit.bind(this)}>
+                    执行
+                  </Button>
                 </Col>
               </Row>
             </Form.Item>

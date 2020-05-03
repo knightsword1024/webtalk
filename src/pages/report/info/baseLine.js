@@ -8,21 +8,22 @@ const FormItem = Form.Item;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-@connect(({}) => ({}))
+@connect(({ response }) => ({ response }))
 export default class baseLine extends Component {
-  state = {
-    aveValue: 11,
-    maxValue: 22,
-  };
+  state = {};
   componentDidMount = () => {
     const { dispatch } = this.props;
-    // dispatch({})
+    dispatch({
+      type: 'response/fetchBaseValue',
+      payload: {},
+    });
   };
   getLine = () => {
-    const showValue = '11';
-    const xValue = [1, 2, 3, 4, 5, 6];
-    const yValue = [10, 20, 30, 40, 50, 60];
-    const unitValue = 's';
+    const {
+      response: { basePowerxValue, basePoweryValue },
+    } = this.props;
+    const showValue = 'baseLine';
+    const unitValue = 'kW';
     let option = {
       tooltip: {
         trigger: 'axis',
@@ -55,7 +56,7 @@ export default class baseLine extends Component {
       xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: xValue,
+        data: basePowerxValue,
       },
       yAxis: {
         type: 'value',
@@ -69,7 +70,7 @@ export default class baseLine extends Component {
       series: [
         {
           name: showValue,
-          data: yValue,
+          data: basePoweryValue,
           type: 'line',
           smooth: true,
           areaStyle: {},
@@ -89,7 +90,9 @@ export default class baseLine extends Component {
   };
 
   render() {
-    const { aveValue, maxValue } = this.state;
+    const {
+      response: { aveValue, maxValue },
+    } = this.props;
     return (
       <div>
         <Card title="基线负荷">

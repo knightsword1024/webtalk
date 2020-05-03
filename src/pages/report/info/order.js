@@ -8,7 +8,13 @@ const FormItem = Form.Item;
 @connect(response => response)
 export default class order extends Component {
   state = {};
-
+  componentWillMount = () => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'response/fetchOrderValue',
+      payload: {},
+    });
+  };
   render() {
     const {
       response: { responseType, responseMode, responseStartTime, responsePower, responseTime },
