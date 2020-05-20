@@ -48,7 +48,8 @@ export default class LoadContrast extends Component {
       },
       {
         title: '占比',
-        render: row => <div>{row.proportion}%</div>,
+        dataIndex: 'proportion',
+        // render: row => <div>{row.proportion}%</div>,
       },
     ];
   }

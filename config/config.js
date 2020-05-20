@@ -60,8 +60,8 @@ export default {
     '@antv/data-set': 'DataSet',
   },
   proxy: {
-    '/talkClient': {
-      target: 'http://139.9.129.170:8080',
+    '/webtalk': {
+      target: 'http://139.9.129.170:8080/',
       changeOrigin: true,
       // pathRewrite: { '^/talkClient': '' },
     },

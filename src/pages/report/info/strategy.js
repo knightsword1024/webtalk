@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Card, DatePicker, Button, Table, Form, Input, Modal, Select, Radio } from 'antd';
 import style from './index.less';
 import { connect } from 'dva';
+import { moment } from 'moment';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -48,6 +49,13 @@ class CreateForm extends Component {
     super(props);
     this.state = {};
   }
+  // componentWillMount = () => {
+  //   const { dispatch } = this.props
+  //   dispatch({
+  //     type: 'response/fetchCalculateValue',
+  //     payload: {},
+  //   })
+  // }
   okHandle = e => {
     const {
       form,
@@ -85,6 +93,13 @@ class CreateForm extends Component {
       endTemB,
       endTemS,
       lighting,
+
+      numofficeMaxValue,
+      numbusiMaxValue,
+      temofficeMaxValue,
+      tembusiMaxValue,
+      airMaxValue,
+      lightMaxValue,
     } = this.props;
     return (
       <Modal
@@ -508,13 +523,12 @@ class CreateForm extends Component {
 export default class Detail extends Component {
   state = {
     value: 1,
-    respondValue: 0,
     selectedRowKeys: [],
     selectRow: [],
     rowValue: [],
     modalVisible: false,
     modalExeVisible: false,
-    exePower: 0,
+    exePower: 1,
 
     engineB: 0,
     engineS: 0,
@@ -553,6 +567,43 @@ export default class Detail extends Component {
       },
     ];
   }
+
+  // componentWillMount=()=>{
+  //   const {
+  //     dispatch,
+  //     response: { responseStartTime, responseTime },
+  //   } = this.props
+  //   var responsEndTime = ''
+  //   if (responseStartTime != '') {
+  //     responsEndTime = moment(responseStartTime)
+  //       .add('minutes', responseTime)
+  //       .format('YYYY-MM-DD HH:mm:ss')
+  //   }
+  //   dispatch({
+  //     type: 'response/fetchPolicyFirst',
+  //     payload: { startTime: responseStartTime, endTime: responsEndTime },
+  //   })
+  //   dispatch({
+  //     type: 'response/fetchPolicySecond',
+  //     payload: { startTime: responseStartTime, endTime: responsEndTime },
+  //   })
+  //   // dispatch({
+  //   //   type: 'response/fetchPolicyThird',
+  //   //   payload: { startTime: responseStartTime, endTime: responsEndTime },
+  //   // })
+  //   dispatch({
+  //     type: 'response/fetchPolicyForth',
+  //     payload: { startTime: responseStartTime, endTime: responsEndTime },
+  //   })
+  //   // dispatch({
+  //   //   type: 'response/fetchPolicyFifth',
+  //   //   payload: { startTime: responseStartTime, endTime: responsEndTime },
+  //   // })
+  //   dispatch({
+  //     type: 'response/fetchPolicySixth',
+  //     payload: { startTime: responseStartTime, endTime: responsEndTime },
+  //   })
+  // }
 
   onChangeModalValue = (key, value) => {
     switch (key) {
@@ -662,6 +713,18 @@ export default class Detail extends Component {
       endTemS,
       lighting,
     } = this.state;
+    const {
+      response: {
+        numofficeBaseValue,
+        numbusiBaseValue,
+        temofficeBaseValue,
+        tembusiBaseValue,
+        airBaseValue,
+        lightBaseValue,
+        responseStartTime,
+        responseEndTime,
+      },
+    } = this.props;
     const { dispatch } = this.props;
     var sendValue = [];
     var value0 = {};
@@ -670,12 +733,31 @@ export default class Detail extends Component {
     var value3 = {};
     var value4 = {};
     var value5 = {};
+    var PolicyFirstValue = {
+      engineB: engineB,
+      engineS: engineS,
+      officeBaseValue: numofficeBaseValue,
+      busiBaseValue: numbusiBaseValue,
+    };
+
     for (let i of selectedRowKeys) {
       if (i == 0) {
-        value0 = { key: 0, engineB: engineB, engineS: engineS };
+        value0 = {
+          key: 0,
+          engineB: engineB,
+          engineS: engineS,
+          officeBaseValue: numofficeBaseValue,
+          busiBaseValue: numbusiBaseValue,
+        };
       }
       if (i == 1) {
-        value1 = { key: 1, outTemB: outTemB, outTemS: outTemS };
+        value1 = {
+          key: 1,
+          outTemB: outTemB,
+          outTemS: outTemS,
+          officeBaseValue: temofficeBaseValue,
+          busiBaseValue: tembusiBaseValue,
+        };
       }
       if (i == 2) {
         value2 = {
@@ -688,13 +770,13 @@ export default class Detail extends Component {
         };
       }
       if (i == 3) {
-        value3 = { key: 3, newTrand: newTrand };
+        value3 = { key: 3, newTrand: newTrand, baseValue: airBaseValue };
       }
       if (i == 4) {
         value4 = { key: 4, endTemB: endTemB, endTemS: endTemS };
       }
       if (i == 5) {
-        value5 = { key: 5, lighting: lighting };
+        value5 = { key: 5, lighting: lighting, baseValue: lightBaseValue };
       }
       if (JSON.stringify(value0) != '{}') {
         sendValue.push(value0);
@@ -715,30 +797,126 @@ export default class Detail extends Component {
       if (JSON.stringify(value5) != '{}') {
         sendValue.push(value5);
       }
-      console.log(sendValue);
-      sendValue = [];
     }
-  };
-
-  onChangePresetTime = (value, dateString) => {
-    console.log(dateString);
-  };
-
-  onChangeExeTime = (value, dateString) => {
-    console.log(dateString);
+    dispatch({
+      type: 'response/fetchCalculateValue',
+      payload: {
+        ResStartTime: responseStartTime,
+        ResEndTime: responseEndTime,
+        sendValue: sendValue,
+        PolicyFirstValue: PolicyFirstValue,
+      },
+    });
+    sendValue = [];
   };
 
   handleSubmit = () => {
-    const { exePower } = this.state;
-    const { dispatch } = this.props;
+    const {
+      exePower,
+      selectedRowKeys,
+      engineB,
+      engineS,
+      outTemB,
+      outTemS,
+      presetTime,
+      presetOutTemB,
+      presetOutTemS,
+      presetEndTemB,
+      presetEndTemS,
+      newTrand,
+      endTemB,
+      endTemS,
+      lighting,
+    } = this.state;
+    const {
+      dispatch,
+      response: {
+        responseStartTime,
+        responseEndTime,
+        responseId,
+        policyBaselineMap,
+        singlePowerMap,
+      },
+    } = this.props;
     if (exePower == 1) {
       return Modal.confirm({
         title: `确定提交响应策略吗？`,
         cancelText: '取消',
         okText: '确定',
         onOk: () => {
-          // dispatch({
-          // })
+          var sendValue = [];
+          var value0 = {};
+          var value1 = {};
+          var value2 = {};
+          var value3 = {};
+          var value4 = {};
+          var value5 = {};
+
+          for (let i of selectedRowKeys) {
+            if (i == 0) {
+              value0 = {
+                key: 0,
+                engineB: engineB,
+                engineS: engineS,
+              };
+            }
+            if (i == 1) {
+              value1 = {
+                key: 1,
+                outTemB: outTemB,
+                outTemS: outTemS,
+              };
+            }
+            if (i == 2) {
+              value2 = {
+                key: 2,
+                presetTime: presetTime,
+                presetOutTemB: presetOutTemB,
+                presetOutTemS: presetOutTemS,
+                presetEndTemB: presetEndTemB,
+                presetEndTemS: presetEndTemS,
+              };
+            }
+            if (i == 3) {
+              value3 = { key: 3, newTrand: newTrand };
+            }
+            if (i == 4) {
+              value4 = { key: 4, endTemB: endTemB, endTemS: endTemS };
+            }
+            if (i == 5) {
+              value5 = { key: 5, lighting: lighting };
+            }
+            if (JSON.stringify(value0) != '{}') {
+              sendValue.push(value0);
+            }
+
+            if (JSON.stringify(value1) != '{}') {
+              sendValue.push(value1);
+            }
+            if (JSON.stringify(value2) != '{}') {
+              sendValue.push(value2);
+            }
+            if (JSON.stringify(value3) != '{}') {
+              sendValue.push(value3);
+            }
+            if (JSON.stringify(value4) != '{}') {
+              sendValue.push(value4);
+            }
+            if (JSON.stringify(value5) != '{}') {
+              sendValue.push(value5);
+            }
+          }
+          dispatch({
+            type: 'response/sendExeValue',
+            payload: {
+              ExeStartTime: responseStartTime,
+              ExeEndTime: responseEndTime,
+              responseId: responseId,
+              SendValue: sendValue,
+              policyBaselineMap: policyBaselineMap,
+              singlePowerMap: singlePowerMap,
+            },
+          });
         },
       });
     } else {
@@ -753,7 +931,7 @@ export default class Detail extends Component {
   render() {
     const {
       value,
-      respondValue,
+
       selectedRowKeys,
       selectRow,
       modalVisible,
@@ -771,11 +949,23 @@ export default class Detail extends Component {
       endTemB,
       endTemS,
       lighting,
+
+      numofficeMaxValue,
+      numbusiMaxValue,
+      temofficeMaxValue,
+      tembusiMaxValue,
+      airMaxValue,
+      lightMaxValue,
     } = this.state;
+    const {
+      response: { calculateValue },
+    } = this.props;
+    var response = localStorage.getItem('response');
     const parentMethods = {
       handleModalVisible: this.handleModalVisible,
       onChangeModalValue: this.onChangeModalValue,
     };
+
     return (
       <div className={style.strategy}>
         <Card
@@ -789,7 +979,7 @@ export default class Detail extends Component {
                   {value ? (
                     <div>
                       响应能力:
-                      {respondValue}
+                      {calculateValue}
                       kW
                     </div>
                   ) : (
@@ -803,13 +993,7 @@ export default class Detail extends Component {
           <Form labelCol={{ span: 3 }} wrapperCol={{ span: 21 }} name="basic">
             <Form.Item label="响应预估：" name="响应预估">
               <Row gutter={5}>
-                <Col span={16}>
-                  <RangePicker
-                    showTime={{ format: 'HH:mm:ss' }}
-                    format="YYYY-MM-DD HH:mm:ss"
-                    onChange={this.onChangePresetTime.bind(this)}
-                  />
-                </Col>
+                <Col span={16}>{response}</Col>
 
                 <Col span={5}>
                   <Button type="primary" onClick={this.handleCalculate.bind(this)}>
@@ -820,13 +1004,7 @@ export default class Detail extends Component {
             </Form.Item>
             <Form.Item label="执行策略：" name="执行策略">
               <Row gutter={5}>
-                <Col span={16}>
-                  <RangePicker
-                    showTime={{ format: 'HH:mm:ss' }}
-                    format="YYYY-MM-DD HH:mm:ss"
-                    onChange={this.onChangeExeTime.bind(this)}
-                  />
-                </Col>
+                <Col span={16}>{response}</Col>
                 <Col span={5}>
                   <Button type="primary" onClick={this.handleSubmit.bind(this)}>
                     执行
@@ -869,6 +1047,12 @@ export default class Detail extends Component {
             endTemS={endTemS}
             newTrand={newTrand}
             lighting={lighting}
+            numofficeMaxValue={numofficeMaxValue}
+            numbusiMaxValue={numbusiMaxValue}
+            temofficeMaxValue={temofficeMaxValue}
+            tembusiMaxValue={tembusiMaxValue}
+            airMaxValue={airMaxValue}
+            lightMaxValue={lightMaxValue}
             {...parentMethods}
           />
         )}

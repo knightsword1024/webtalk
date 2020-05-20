@@ -12,8 +12,8 @@ const { RangePicker } = DatePicker;
 @connect(({ analysis }) => ({ analysis }))
 export default class Wtfchw extends Component {
   state = {
-    date: [],
-    time: '',
+    date1: '',
+    date2: '',
   };
   componentWillMount = () => {
     const { dispatch } = this.props;
@@ -65,6 +65,12 @@ export default class Wtfchw extends Component {
         type: 'category',
         boundaryGap: false,
         data: WTFchwxValue,
+        axisLabel: {
+          show: true,
+          showMinLabel: true,
+          showMaxLabel: true,
+          formatter: `{value}${'号'}`,
+        },
       },
       yAxis: {
         type: 'value',
@@ -138,16 +144,21 @@ export default class Wtfchw extends Component {
   }
   handleSubmit = () => {
     const { dispatch } = this.props;
+    const { date1, date2 } = this.state;
+    dispatch({
+      type: 'analysis/fetchWTFchwValue',
+      payload: { startTime: date1, endTime: date2 },
+    });
   };
 
-  onChangeDate = () => {
-    const { dispatch } = this.props;
+  onChangeDate = (data, datastring) => {
+    console.log(datastring);
+    this.setState({
+      date1: datastring[0] + '00:00:00',
+      date2: datastring[1] + '00:00:00',
+    });
   };
-  onChange = (key, value) => {
-    const { dispatch } = this.props;
-    this.setState({});
-    // dispatch({})
-  };
+
   render() {
     return (
       <div>

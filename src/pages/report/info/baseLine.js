@@ -3,6 +3,7 @@ import { Card, Row, Col, Form, Select, Button, DatePicker } from 'antd';
 import { connect } from 'dva';
 import ReactEcharts from 'echarts-for-react';
 import style from './index.less';
+import moment from 'moment';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -11,13 +12,22 @@ const { RangePicker } = DatePicker;
 @connect(({ response }) => ({ response }))
 export default class baseLine extends Component {
   state = {};
-  componentDidMount = () => {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'response/fetchBaseValue',
-      payload: {},
-    });
-  };
+  // componentDidMount = () => {
+  //   const {
+  //     dispatch,
+  //     response: { responseStartTime, responseTime },
+  //   } = this.props
+  //   var responsEndTime = ''
+  //   if (responseStartTime != '') {
+  //     responsEndTime = moment(responseStartTime)
+  //       .add('minutes', responseTime)
+  //       .format('YYYY-MM-DD HH:mm:ss')
+  //   }
+  //   dispatch({
+  //     type: 'response/fetchBaseValue',
+  //     payload: { startTime: responseStartTime, endTime: responsEndTime },
+  //   })
+  // }
   getLine = () => {
     const {
       response: { basePowerxValue, basePoweryValue },

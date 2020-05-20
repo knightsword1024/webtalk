@@ -94,6 +94,12 @@ export default class Cop extends Component {
         type: 'category',
         boundaryGap: false,
         data: COPxValue,
+        axisLabel: {
+          show: true,
+          showMinLabel: true,
+          showMaxLabel: true,
+          formatter: `{value}${'号'}`,
+        },
       },
       yAxis: {
         type: 'value',

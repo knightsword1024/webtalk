@@ -1,4 +1,5 @@
 import { getTableValue, getDayValue, getMonthValue } from '@/services/consumption';
+import { message } from 'antd';
 
 export default {
   namespace: 'consumption',
@@ -16,24 +17,36 @@ export default {
   effects: {
     *fetchTableValue({ payload }, { call, put }) {
       const response = yield call(getTableValue, payload);
-      yield put({
-        type: 'setTableValue',
-        payload: response,
-      });
+      if (response.code == 200) {
+        yield put({
+          type: 'setTableValue',
+          payload: response,
+        });
+      } else {
+        message.error('返回错误');
+      }
     },
     *fetchDayValue({ payload }, { call, put }) {
       const response = yield call(getDayValue, payload);
-      yield put({
-        type: 'setDayValue',
-        payload: response,
-      });
+      if (response.code == 200) {
+        yield put({
+          type: 'setDayValue',
+          payload: response,
+        });
+      } else {
+        message.error('返回错误');
+      }
     },
     *fetchMonthValue({ payload }, { call, put }) {
       const response = yield call(getMonthValue, payload);
-      yield put({
-        type: 'setMonthValue',
-        payload: response,
-      });
+      if (response.code == 200) {
+        yield put({
+          type: 'setMonthValue',
+          payload: response,
+        });
+      } else {
+        message.error('返回错误');
+      }
     },
   },
 

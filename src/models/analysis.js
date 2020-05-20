@@ -15,8 +15,8 @@ export default {
     EERryValueBusi: [],
     EERryValueOffice: [],
 
-    COPxValue: [1, 2],
-    COPyValue: [{ key: 'C_6001_AV_0000', value: [1, 2] }, { key: 'C_6001_AV_0001', value: [2, 4] }],
+    COPxValue: [],
+    COPyValue: [],
 
     WTFchwxValue: [],
     WTFchwyValueOffice: [],
@@ -64,9 +64,11 @@ export default {
       };
     },
     setCOPValue(state, action) {
+      console.log(action.payload.result);
       return {
         ...state,
-        // tableValue: action.payload.data,
+        COPxValue: action.payload.result.COPxValue,
+        COPyValue: action.payload.result.COPyValue,
       };
     },
     setWTFchwValue(state, action) {
