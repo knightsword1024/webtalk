@@ -56,6 +56,7 @@ export default {
   theme: {
     'primary-color': defaultSettings.primaryColor,
   },
+  history: 'hash',
   externals: {
     '@antv/data-set': 'DataSet',
   },
