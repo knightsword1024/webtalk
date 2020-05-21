@@ -154,8 +154,8 @@ export default class Wtfchw extends Component {
   onChangeDate = (data, datastring) => {
     console.log(datastring);
     this.setState({
-      date1: datastring[0] + '00:00:00',
-      date2: datastring[1] + '00:00:00',
+      date1: datastring[0] + ' 00:00:00',
+      date2: datastring[1] + ' 00:00:00',
     });
   };
 

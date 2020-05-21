@@ -155,6 +155,7 @@ export default class Cop extends Component {
   handleSubmit = () => {
     const { dispatch } = this.props;
     const { startTime, endTime, classify } = this.state;
+    console.log(startTime);
     dispatch({
       type: 'analysis/fetchCOPValue',
       payload: { startTime: startTime, endTime: endTime, classify: classify },
@@ -163,8 +164,8 @@ export default class Cop extends Component {
 
   onChangeDate = (date, dataString) => {
     this.setState({
-      startTime: dataString[0] + '00:00:00',
-      endTime: dataString[1] + '00:00:00',
+      startTime: dataString[0] + ' 00:00:00',
+      endTime: dataString[1] + ' 00:00:00',
     });
   };
 
