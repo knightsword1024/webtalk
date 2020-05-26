@@ -27,13 +27,12 @@ export default class Cop extends Component {
   };
   componentWillMount = () => {
     const { dispatch } = this.props;
-    // var date1 = moment().format('YYYY-MM-DD') + ' 00:00:00'
-    // var date2 =
-    //   moment()
-    //     .subtract('days', 30)
-    //     .format('YYYY-MM-DD') + ' 00:00:00'
-    var date2 = '2019-11-01 00:00:00';
-    var date1 = '2019-11-15 00:00:00';
+    var date1 = moment().format('YYYY-MM-DD') + ' 00:00:00';
+    var date2 =
+      moment()
+        .subtract('days', 30)
+        .format('YYYY-MM-DD') + ' 00:00:00';
+
     dispatch({
       type: 'analysis/fetchCOPValue',
       payload: { startTime: date2, endTime: date1, classify: 1 },
