@@ -42,6 +42,9 @@ export default class EERr extends Component {
           },
         },
       },
+      legend: {
+        data: ['商用EERr', '办公EERr'],
+      },
       dataZoom: [
         {
           show: true,

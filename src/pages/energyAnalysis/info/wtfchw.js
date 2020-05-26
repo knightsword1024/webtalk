@@ -42,6 +42,9 @@ export default class Wtfchw extends Component {
           },
         },
       },
+      legend: {
+        data: ['商业WTFchw', '办公WTFchw'],
+      },
       dataZoom: [
         {
           show: true,
@@ -128,11 +131,6 @@ export default class Wtfchw extends Component {
               <RangePicker onChange={this.onChangeDate} />
             </div>
           </Col>
-          {/* <Col span={6}>
-            <div className={style.select}>
-              <Select placeholder="时间间隔" onChange={() => this.onChange} />
-            </div>
-          </Col> */}
           <Col span={4}>
             <Button type="primary" onClick={this.handleSubmit}>
               查询
@@ -152,7 +150,6 @@ export default class Wtfchw extends Component {
   };
 
   onChangeDate = (data, datastring) => {
-    console.log(datastring);
     this.setState({
       date1: datastring[0] + ' 00:00:00',
       date2: datastring[1] + ' 00:00:00',

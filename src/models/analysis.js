@@ -64,7 +64,7 @@ export default {
       };
     },
     setCOPValue(state, action) {
-      console.log(action.payload.result);
+      console.log(action.payload.result.COPyValue);
       return {
         ...state,
         COPxValue: action.payload.result.COPxValue,

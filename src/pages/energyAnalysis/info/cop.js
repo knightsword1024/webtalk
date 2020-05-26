@@ -9,13 +9,13 @@ const FormItem = Form.Item;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const deviceName = {
-  C_6001_AV_0000: '办公1#机组',
-  C_6001_AV_0001: '办公2#机组',
-  C_6001_AV_0002: '办公3#机组',
-  C_6001_AV_0003: '商业1#机组',
-  C_6001_AV_0004: '商业2#机组',
-  C_6001_AV_0005: '商业3#机组',
-  C_6001_AV_0006: '商业4#机组',
+  C_CETD10000003_AV_0000: '办公1#机组',
+  C_CETD10000007_AV_0000: '办公2#机组',
+  C_CETD10000008_AV_0000: '办公3#机组',
+  C_CETD10000004_AV_0000: '商业1#机组',
+  C_CETD10000005_AV_0000: '商业2#机组',
+  C_CETD10000006_AV_0000: '商业3#机组',
+  C_CETD10000012_AV_0000: '商业4#机组',
 };
 
 @connect(({ analysis }) => ({ analysis }))
@@ -27,11 +27,13 @@ export default class Cop extends Component {
   };
   componentWillMount = () => {
     const { dispatch } = this.props;
-    var date1 = moment().format('YYYY-MM-DD') + ' 00:00:00';
-    var date2 =
-      moment()
-        .subtract('days', 30)
-        .format('YYYY-MM-DD') + ' 00:00:00';
+    // var date1 = moment().format('YYYY-MM-DD') + ' 00:00:00'
+    // var date2 =
+    //   moment()
+    //     .subtract('days', 30)
+    //     .format('YYYY-MM-DD') + ' 00:00:00'
+    var date2 = '2019-11-01 00:00:00';
+    var date1 = '2019-11-15 00:00:00';
     dispatch({
       type: 'analysis/fetchCOPValue',
       payload: { startTime: date2, endTime: date1, classify: 1 },
@@ -44,10 +46,12 @@ export default class Cop extends Component {
     const showValue = 'COP';
     const unitValue = '';
     var seriesValue = [];
+    var legendName = [];
     for (let i in COPyValue) {
+      legendName.push(deviceName[i]);
       seriesValue.push({
-        name: deviceName[COPyValue[i].key],
-        data: COPyValue[i].value,
+        name: deviceName[i],
+        data: COPyValue[i],
         type: 'line',
         smooth: true,
         areaStyle: {},
@@ -61,6 +65,7 @@ export default class Cop extends Component {
         },
       });
     }
+    // console.log(legendName)
     let option = {
       tooltip: {
         trigger: 'axis',
@@ -70,6 +75,9 @@ export default class Cop extends Component {
             backgroundColor: '#6a7985',
           },
         },
+      },
+      legend: {
+        data: legendName,
       },
       dataZoom: [
         {
@@ -103,6 +111,8 @@ export default class Cop extends Component {
       },
       yAxis: {
         type: 'value',
+        minInterval: 1,
+        boundaryGap: [0, 0.1],
         axisLabel: {
           show: true,
           showMinLabel: true,
@@ -155,7 +165,6 @@ export default class Cop extends Component {
   handleSubmit = () => {
     const { dispatch } = this.props;
     const { startTime, endTime, classify } = this.state;
-    console.log(startTime);
     dispatch({
       type: 'analysis/fetchCOPValue',
       payload: { startTime: startTime, endTime: endTime, classify: classify },
