@@ -72,7 +72,7 @@ export default class Wtfchw extends Component {
           show: true,
           showMinLabel: true,
           showMaxLabel: true,
-          formatter: `{value}${'号'}`,
+          // formatter: `{value}${'号'}`,
         },
       },
       yAxis: {
