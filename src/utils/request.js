@@ -62,6 +62,7 @@ const request = extend({
 
 // request拦截器, 改变url 或 options.
 request.interceptors.request.use(async (url, options) => {
+  console.log(options);
   return {
     url: url,
     options: { ...options },
