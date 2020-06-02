@@ -2,57 +2,76 @@ import React, { Component, Fragment } from 'react';
 import { Card, Row, Col, Form, Select, Button, DatePicker, Table } from 'antd';
 import { connect } from 'dva';
 import style from './index.less';
+import moment from 'moment';
+import router from 'umi/router';
 
 const FormItem = Form.Item;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-@connect(({}) => ({}))
+@connect(({ result }) => ({ result }))
 export default class historyLook extends Component {
   state = {
-    date: [],
-    time: '',
+    startDate: '',
+    endDate: '',
   };
   componentDidMount = () => {
     const { dispatch } = this.props;
-    // dispatch({})
+    var date1 = moment().format('YYYY-MM-DD');
+    var date2 = moment()
+      .subtract('days', 30)
+      .format('YYYY-MM-DD');
+    dispatch({
+      type: 'result/fetchTableValue',
+      payload: { startDate: date2, endDate: date1 },
+    });
   };
   createColumn() {
     return [
       {
         title: '响应时间',
-        dataIndex: 'locationid',
+        dataIndex: 'responseTime',
+        width: 120,
       },
       {
         title: '要求负荷/kW',
-        dataIndex: 'location1',
+        dataIndex: 'requirePower',
       },
       {
         title: '认缴负荷/kW',
-        dataIndex: 'location2',
+        dataIndex: 'payPower',
       },
       {
         title: '响应负荷/kW',
-        dataIndex: 'location3',
+        dataIndex: 'cutPower',
       },
       {
         title: '获得收益/元',
-        dataIndex: 'location4',
+        dataIndex: 'yieldProfit',
       },
       {
         title: '查看',
         render: row => (
           <div>
-            <a>查看</a>
+            <a onClick={() => this.lookData(row)}>查看</a>
           </div>
         ),
       },
     ];
   }
+  lookData = row => {
+    var src = row.responseTime.substr(0, 10);
+    var reg = new RegExp('/', 'gi');
+    var src2 = src.replace(reg, '');
+    router.push({
+      pathname: `/trace/${src2}`,
+      state: { responseTime: src2 },
+    });
+  };
   renderSimpleForm() {
     const {} = this.props;
     return (
-      <div style={{ marginLeft: 40 }}>
+      <div style={{ marginBottom: 4 }}>
         <Fragment>
           <Row gutter={20}>
             <Col span={9}>
@@ -72,21 +91,30 @@ export default class historyLook extends Component {
   }
   handleSubmit = () => {
     const { dispatch } = this.props;
+    const { startDate, endDate } = this.state;
+    dispatch({
+      type: 'result/fetchTableValue',
+      payload: { startDate: startDate, endDate: endDate },
+    });
   };
 
-  onChangeDate = () => {
-    const { dispatch } = this.props;
+  onChangeDate = (date, datestring) => {
+    this.setState({ startDate: datestring[0], endDate: datestring[1] });
   };
 
   render() {
+    const {
+      result: { tableValue },
+    } = this.props;
     return (
-      <div>
+      <div className={style.card}>
         <Card title="历史响应查看">
           {this.renderSimpleForm()}
           <Table
             rowKey={record => record.id}
             columns={this.createColumn()}
-            //   dataSource={locationList}
+            dataSource={tableValue}
+            scroll={{ y: 82 }}
           />
         </Card>
       </div>

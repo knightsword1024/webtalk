@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import { Row, Col, Card, Select, Button, Statistic } from 'antd';
 import ReactEcharts from 'echarts-for-react';
+import { connect } from 'dva';
 import style from './index.less';
 
 const { Option } = Select;
+
+@connect(trace => trace)
 export default class responseCurve extends Component {
+  state = {
+    systemId: '',
+  };
+
   getLine = () => {
-    const showValue = '11';
-    const xValue = [1, 2, 3, 4, 5, 6];
-    const yValue = [10, 20, 30, 40, 50, 60];
-    const unitValue = 's';
+    const {
+      trace: { powerxValue, baseLinePower, realPower, realCutPower },
+    } = this.props;
+    const unitValue = 'kw';
     let option = {
       tooltip: {
         trigger: 'axis',
@@ -19,6 +26,9 @@ export default class responseCurve extends Component {
             backgroundColor: '#6a7985',
           },
         },
+      },
+      legend: {
+        data: ['基线负荷', '实际负荷', '响应负荷'],
       },
       dataZoom: [
         {
@@ -42,7 +52,7 @@ export default class responseCurve extends Component {
       xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: xValue,
+        data: powerxValue,
       },
       yAxis: {
         type: 'value',
@@ -55,14 +65,49 @@ export default class responseCurve extends Component {
       },
       series: [
         {
-          name: showValue,
-          data: yValue,
+          name: '基线负荷',
+          data: baseLinePower,
           type: 'line',
           smooth: true,
+          stack: '总量',
           areaStyle: {},
           itemStyle: {
             normal: {
-              color: '#4FC8FF',
+              // color: '#4FC8FF',
+              lineStyle: {
+                width: 2,
+                type: 'solid', // 'dotted'虚线 'solid'实线
+              },
+            },
+          },
+        },
+        {
+          name: '实际负荷',
+          data: realPower,
+          type: 'line',
+          smooth: true,
+          stack: '总量',
+          areaStyle: {},
+          itemStyle: {
+            normal: {
+              // color: '#4FC8FF',
+              lineStyle: {
+                width: 2,
+                type: 'solid', // 'dotted'虚线 'solid'实线
+              },
+            },
+          },
+        },
+        {
+          name: '响应负荷',
+          data: realCutPower,
+          type: 'line',
+          smooth: true,
+          stack: '总量',
+          areaStyle: {},
+          itemStyle: {
+            normal: {
+              // color: '#4FC8FF',
               lineStyle: {
                 width: 2,
                 type: 'solid', // 'dotted'虚线 'solid'实线
@@ -75,14 +120,24 @@ export default class responseCurve extends Component {
     return option;
   };
   handleSubmit = () => {
-    const { dispatch } = this.props;
+    const {
+      dispatch,
+      trace: { responseId },
+    } = this.props;
+    const { systemId } = this.state;
+    var date = localStorage.getItem('searchTime');
+    dispatch({
+      type: 'trace/fetchLineValue',
+      payload: { responseDate: date, systemId: systemId, responseId: responseId },
+    });
   };
-  onChange = (key, value) => {
-    const { dispatch } = this.props;
-    this.setState({});
-    // dispatch({})
+  onChange = value => {
+    this.setState({ systemId: value });
   };
   render() {
+    const {
+      trace: { PPI, SPI },
+    } = this.props;
     return (
       <div className={style.buttom}>
         <Row gutter={16}>
@@ -95,10 +150,32 @@ export default class responseCurve extends Component {
                       <span>响应曲线</span>
                     </Col>
                     <Col span={5}>
-                      <Select placeholder="请选择策略" onChange={() => this.onChange} />
+                      <Select placeholder="请选择策略" onChange={this.onChange}>
+                        <Option key={'all'} value={''}>
+                          全部
+                        </Option>
+                        <Option key={0} value={0}>
+                          策略一
+                        </Option>
+                        <Option key={1} value={1}>
+                          策略二
+                        </Option>
+                        <Option key={2} value={2}>
+                          策略三
+                        </Option>
+                        <Option key={3} value={3}>
+                          策略四
+                        </Option>
+                        <Option key={4} value={4}>
+                          策略五
+                        </Option>
+                        <Option key={5} value={5}>
+                          策略六
+                        </Option>
+                      </Select>
                     </Col>
                     <Col span={4}>
-                      <Button type="primary" onClick={() => this.handleSubmit}>
+                      <Button type="primary" onClick={this.handleSubmit}>
                         查询
                       </Button>
                     </Col>
@@ -115,11 +192,11 @@ export default class responseCurve extends Component {
           </Col>
           <Col span={3}>
             <Row>
-              <Statistic title="SPI" value={93} suffix="" />
+              <Statistic title="SPI" value={PPI} suffix="" />
             </Row>
             <div style={{ marginTop: 17 }}>
               <Row>
-                <Statistic title="PPI" value={93} suffix="" />
+                <Statistic title="PPI" value={SPI} suffix="" />
               </Row>
             </div>
           </Col>

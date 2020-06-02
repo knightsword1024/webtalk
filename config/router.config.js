@@ -15,6 +15,11 @@ export default [
     component: './result',
   },
   {
+    path: '/trace/:id',
+    name: 'trace',
+    component: './trace',
+  },
+  {
     path: '/trace',
     name: 'trace',
     component: './trace',

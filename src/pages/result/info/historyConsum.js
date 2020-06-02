@@ -3,12 +3,13 @@ import { Card, Row, Col, Form, Select, Button, DatePicker } from 'antd';
 import { connect } from 'dva';
 import ReactEcharts from 'echarts-for-react';
 import style from './index.less';
+import moment from 'moment';
 
 const FormItem = Form.Item;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-@connect(({}) => ({}))
+@connect(({ result }) => ({ result }))
 export default class historyConsum extends Component {
   state = {
     date: [],
@@ -16,114 +17,82 @@ export default class historyConsum extends Component {
   };
   componentDidMount = () => {
     const { dispatch } = this.props;
-    // dispatch({})
+    var date = moment().format('YYYY-MM-DD');
+    dispatch({
+      type: 'result/fetchLineValue',
+      payload: { inquireDate: date },
+    });
   };
   getLine = () => {
-    const showValue = '11';
-    const xValue = [1, 2, 3, 4, 5, 6];
-    const yValue = [10, 20, 30, 40, 50, 60];
-    const unitValue = 's';
+    const {
+      result: { historyRespTime, payPower, cutPower, yieldProfit },
+    } = this.props;
     let option = {
       tooltip: {
         trigger: 'axis',
         axisPointer: {
           type: 'cross',
-          label: {
-            backgroundColor: '#6a7985',
+          crossStyle: {
+            color: '#999',
           },
         },
       },
-      dataZoom: [
+      legend: {
+        data: ['认缴负荷', '削减负荷', '获得收益'],
+      },
+      xAxis: [
         {
-          show: true,
-          realtime: true,
-          start: 0,
-          end: 100,
-          dataBackgroundColor: '#4FC8FF',
-          //             // fillerColor: '',
-          textStyle: {
-            color: '#fff',
+          type: 'category',
+          data: historyRespTime,
+          axisPointer: {
+            type: 'shadow',
           },
-        },
-        {
-          type: 'inside',
-          realtime: true,
-          start: 0,
-          end: 100,
         },
       ],
-      xAxis: {
-        type: 'category',
-        boundaryGap: false,
-        data: xValue,
-      },
-      yAxis: {
-        type: 'value',
-        axisLabel: {
-          show: true,
-          showMinLabel: true,
-          showMaxLabel: true,
-          formatter: `{value}${unitValue}`,
+      yAxis: [
+        {
+          type: 'value',
+          name: '负荷',
+          min: 0,
+          max: 100,
+          interval: 20,
+          axisLabel: {
+            formatter: '{value}kW',
+          },
         },
-      },
+        {
+          type: 'value',
+          name: '收益',
+          min: 0,
+          max: 100,
+          interval: 20,
+          axisLabel: {
+            formatter: '{value}万元',
+          },
+        },
+      ],
       series: [
         {
-          name: showValue,
-          data: yValue,
+          name: '认缴负荷',
+          type: 'bar',
+          data: payPower,
+        },
+        {
+          name: '削减负荷',
+          type: 'bar',
+          data: cutPower,
+        },
+        {
+          name: '获得收益',
           type: 'line',
-          smooth: true,
-          areaStyle: {},
-          itemStyle: {
-            normal: {
-              color: '#4FC8FF',
-              lineStyle: {
-                width: 2,
-                type: 'solid', // 'dotted'虚线 'solid'实线
-              },
-            },
-          },
+          yAxisIndex: 1,
+          data: yieldProfit,
         },
       ],
     };
     return option;
   };
-  //   renderSimpleForm () {
-  //     const {} = this.props
-  //     return (
-  //         <div style={{marginLeft:120}}>
-  //       <Fragment>
-  //         <Row gutter={20}>
-  //           <Col span={4}>
-  //             <div className={style.select}>
-  //               <RangePicker onChange={this.onChangeDate} />
-  //             </div>
-  //           </Col>
-  //           <Col span={3}>
-  //             <div className={style.select}>
-  //               <Select placeholder='时间间隔' onChange={() => this.onChange}></Select>
-  //             </div>
-  //           </Col>
-  //           <Col span={2}>
-  //             <Button type='primary' onClick={this.handleSubmit}>
-  //               查询
-  //             </Button>
-  //           </Col>
-  //         </Row>
-  //       </Fragment></div>
-  //     )
-  //   }
-  handleSubmit = () => {
-    const { dispatch } = this.props;
-  };
 
-  onChangeDate = () => {
-    const { dispatch } = this.props;
-  };
-  onChange = (key, value) => {
-    const { dispatch } = this.props;
-    this.setState({});
-    // dispatch({})
-  };
   render() {
     return (
       <div>

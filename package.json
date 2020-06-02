@@ -26,6 +26,7 @@
     "docker-prod:build": "docker-compose -f ./docker/docker-compose.yml build"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.2.1",
     "@antv/data-set": "^0.9.6",
     "@babel/runtime": "^7.0.0",
     "antd": "^3.9.2",

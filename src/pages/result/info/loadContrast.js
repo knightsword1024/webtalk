@@ -3,12 +3,13 @@ import { Card, Row, Col, Form, Select, Button, DatePicker } from 'antd';
 import { connect } from 'dva';
 import ReactEcharts from 'echarts-for-react';
 import style from './index.less';
+import moment from 'moment';
 
 const FormItem = Form.Item;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-@connect(({}) => ({}))
+@connect(result => result)
 export default class LoadContrast extends Component {
   state = {
     date: [],
@@ -16,9 +17,16 @@ export default class LoadContrast extends Component {
   };
   componentDidMount = () => {
     const { dispatch } = this.props;
-    // dispatch({})
+    var date = moment().format('YYYY-MM-DD') + ' 00:00:00';
+    dispatch({
+      type: 'result/fetchPieValue',
+      payload: { responseDate: date },
+    });
   };
   getLine = () => {
+    const {
+      result: { proportionDate },
+    } = this.props;
     let option = {
       tooltip: {
         trigger: 'item',
@@ -39,16 +47,7 @@ export default class LoadContrast extends Component {
           type: 'pie',
           radius: '90%',
           center: ['50%', '50%'],
-          data: [
-            { value: 335, name: '策略一' },
-            { value: 310, name: '策略二' },
-            { value: 274, name: '策略三' },
-            { value: 235, name: '策略四' },
-            { value: 400, name: '策略五' },
-            { value: 500, name: '策略六' },
-          ].sort(function(a, b) {
-            return a.value - b.value;
-          }),
+          data: proportionDate,
           roseType: 'radius',
           label: {
             color: 'rgba(0, 0, 0, 1)',
@@ -61,11 +60,11 @@ export default class LoadContrast extends Component {
             length: 10,
             length2: 20,
           },
-          itemStyle: {
-            color: '#41a2f4',
-            shadowBlur: 200,
-            shadowColor: 'rgba(0, 0, 0, 0.5)',
-          },
+          // itemStyle: {
+          //   color: '#41a2f4',
+          //   shadowBlur: 200,
+          //   shadowColor: 'rgba(0, 0, 0, 0.5)',
+          // },
 
           animationType: 'scale',
           animationEasing: 'elasticOut',
@@ -78,18 +77,6 @@ export default class LoadContrast extends Component {
     return option;
   };
 
-  handleSubmit = () => {
-    const { dispatch } = this.props;
-  };
-
-  onChangeDate = () => {
-    const { dispatch } = this.props;
-  };
-  onChange = (key, value) => {
-    const { dispatch } = this.props;
-    this.setState({});
-    // dispatch({})
-  };
   render() {
     return (
       <div>
