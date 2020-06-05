@@ -66,21 +66,52 @@ export default class baseLine extends Component {
       xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: basePowerxValue,
+        // data: basePowerxValue,
+        data: [
+          '12:00',
+          '12:10',
+          '12:20',
+          '12:30',
+          '12:40',
+          '12:50',
+          '13:00',
+          '13:10',
+          '13:20',
+          '13:30',
+          '13:40',
+          '13:50',
+          '14:00',
+        ],
       },
       yAxis: {
         type: 'value',
+        name: '负荷/kW',
         axisLabel: {
           show: true,
           showMinLabel: true,
           showMaxLabel: true,
-          formatter: `{value}${unitValue}`,
+          // formatter: `{value}${unitValue}`,
         },
       },
       series: [
         {
           name: showValue,
-          data: basePoweryValue,
+          // data: basePoweryValue,
+          data: [
+            '1250',
+            '1196',
+            '1284',
+            '1263',
+            '1225',
+            '1185',
+            '1194',
+            '1236',
+            '1201',
+            '1183',
+            '1214',
+            '1252',
+            '1200',
+          ],
           type: 'line',
           smooth: true,
           areaStyle: {},
@@ -109,13 +140,13 @@ export default class baseLine extends Component {
           <div>
             <div className={style.label1}>
               基线最大负荷：
-              {maxValue}
+              {/* {maxValue} */ '1284'}
               kW
             </div>
             &nbsp;&nbsp;
             <div className={style.label2}>
               基线平均负荷：
-              {aveValue}
+              {/* {aveValue} */ '1222'}
               kW
             </div>
           </div>

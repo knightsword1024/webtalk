@@ -20,10 +20,13 @@ export default class historyConsum extends Component {
   };
   getLine = () => {
     const showValue = '11';
-    const xValue = [1, 2, 3, 4, 5, 6];
-    const yValue = [10, 20, 30, 40, 50, 60];
+    // const xValue = [1, 2, 3, 4, 5, 6];
+    // const yValue = [10, 20, 30, 40, 50, 60];
     const unitValue = 's';
     let option = {
+      legend: {
+        data: ['认缴负荷', '响应负荷', '获得收益'],
+      },
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -54,34 +57,86 @@ export default class historyConsum extends Component {
       ],
       xAxis: {
         type: 'category',
-        boundaryGap: false,
-        data: xValue,
-      },
-      yAxis: {
-        type: 'value',
-        axisLabel: {
-          show: true,
-          showMinLabel: true,
-          showMaxLabel: true,
-          formatter: `{value}${unitValue}`,
+        boundaryGap: true,
+        axisTick: {
+          alignWithLabel: true,
         },
+        // data: xValue,
+        data: [
+          '2019/7/23',
+          '2019/7/28',
+          '2019/8/3',
+          '2019/8/9',
+          '2019/8/23',
+          '2020/5/10',
+          '2020/5/20',
+          '2020/6/1',
+        ],
       },
-      series: [
+      yAxis: [
+        // type: 'value',
+        // axisLabel: {
+        //   show: true,
+        //   showMinLabel: true,
+        //   showMaxLabel: true,
+        //   formatter: `{value}${unitValue}`,
+        // },
         {
-          name: showValue,
-          data: yValue,
-          type: 'line',
-          smooth: true,
-          areaStyle: {},
-          itemStyle: {
-            normal: {
-              color: '#4FC8FF',
-              lineStyle: {
-                width: 2,
-                type: 'solid', // 'dotted'虚线 'solid'实线
-              },
-            },
+          type: 'value',
+          name: '负荷/kW',
+          min: 0,
+          max: 350,
+          interval: 50,
+          axisLabel: {
+            formatter: '{value}',
           },
+        },
+        {
+          type: 'value',
+          name: '收益/元',
+          min: 0,
+          max: 14000,
+          interval: 2000,
+          axisLabel: {
+            formatter: '{value}',
+          },
+        },
+      ],
+      series: [
+        // {
+        //   name: showValue,
+        //   // data: yValue,
+
+        //   type: 'line',
+        //   smooth: true,
+        //   areaStyle: {},
+        //   itemStyle: {
+        //     normal: {
+        //       color: '#4FC8FF',
+        //       lineStyle: {
+        //         width: 2,
+        //         type: 'solid', // 'dotted'虚线 'solid'实线
+        //       },
+        //     },
+        //   },
+        // },
+        {
+          name: '认缴负荷',
+          type: 'bar',
+          barWidth: '30%',
+          data: [200, 300, 300, 300, 200, 200, 200, 200],
+        },
+        {
+          name: '响应负荷',
+          type: 'bar',
+          barWidth: '30%',
+          data: [223, 315, 304, 310, 210, 206, 218, 230],
+        },
+        {
+          name: '获得收益',
+          type: 'line',
+          yAxisIndex: 1,
+          data: [6000, 9000, 9000, 9000, 6000, 6000, 6000, 6000],
         },
       ],
     };

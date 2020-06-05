@@ -59,20 +59,20 @@ export default class order extends Component {
           <div className={style.form}>
             <Form labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} name="basic">
               <Form.Item label="响应类型" name="响应类型">
-                {resType[responseType]}
+                {/* {resType[responseType]} */ '削峰'}
               </Form.Item>
               <Form.Item label="响应方式" name="响应方式">
-                {resMode[responseMode]}
+                {/* {resMode[responseMode]} */ '约定需求响应'}
               </Form.Item>
               <Form.Item label="响应开始时间" name="响应开始时间">
-                {responseStartTime}
+                {/* {responseStartTime} */ '2020-6-1 12:00'}
               </Form.Item>
               <Form.Item label="响应功率" name="响应功率">
-                {responsePower}
+                {/* {responsePower} */ '200'}
                 kW
               </Form.Item>
               <Form.Item label="响应时间" name="响应时间">
-                {responseTime}
+                {/* {responseTime} */ '60'}
                 分钟
               </Form.Item>
             </Form>

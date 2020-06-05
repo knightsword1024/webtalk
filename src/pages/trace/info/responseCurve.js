@@ -9,7 +9,7 @@ export default class responseCurve extends Component {
     const showValue = '11';
     const xValue = [1, 2, 3, 4, 5, 6];
     const yValue = [10, 20, 30, 40, 50, 60];
-    const unitValue = 's';
+    const unitValue = 'kW';
     let option = {
       tooltip: {
         trigger: 'axis',
@@ -19,6 +19,9 @@ export default class responseCurve extends Component {
             backgroundColor: '#6a7985',
           },
         },
+      },
+      legend: {
+        data: ['基线负荷', '实际负荷', '响应负荷'],
       },
       dataZoom: [
         {
@@ -41,8 +44,23 @@ export default class responseCurve extends Component {
       ],
       xAxis: {
         type: 'category',
-        boundaryGap: false,
-        data: xValue,
+        boundaryGap: true,
+        // data: xValue,
+        data: [
+          '12:00',
+          '12:10',
+          '12:20',
+          '12:30',
+          '12:40',
+          '12:50',
+          '13:00',
+          '13:10',
+          '13:20',
+          '13:30',
+          '13:40',
+          '13:50',
+          '14:00',
+        ],
       },
       yAxis: {
         type: 'value',
@@ -54,21 +72,40 @@ export default class responseCurve extends Component {
         },
       },
       series: [
+        // {
+        //   name: showValue,
+        //   data: yValue,
+
+        //   type: 'line',
+        //   smooth: true,
+        //   areaStyle: {},
+        //   itemStyle: {
+        //     normal: {
+        //       color: '#4FC8FF',
+        //       lineStyle: {
+        //         width: 2,
+        //         type: 'solid', // 'dotted'虚线 'solid'实线
+        //       },
+        //     },
+        //   },
+        // },
         {
-          name: showValue,
-          data: yValue,
+          name: '基线负荷',
           type: 'line',
-          smooth: true,
           areaStyle: {},
-          itemStyle: {
-            normal: {
-              color: '#4FC8FF',
-              lineStyle: {
-                width: 2,
-                type: 'solid', // 'dotted'虚线 'solid'实线
-              },
-            },
-          },
+          data: [1250, 1196, 1284, 1263, 1225, 1185, 1194, 1236, 1201, 1183, 1214, 1252, 1200],
+        },
+        {
+          name: '实际负荷',
+          type: 'line',
+          areaStyle: {},
+          data: [1040, 981, 1048, 1021, 977, 936, 957, 1016, 976, 962, 988, 1034, 984],
+        },
+        {
+          name: '响应负荷',
+          type: 'bar',
+          // yAxisIndex: 1,
+          data: [210, 215, 236, 242, 248, 246, 237, 220, 225, 221, 226, 218, 216],
         },
       ],
     };
@@ -91,13 +128,13 @@ export default class responseCurve extends Component {
               title={
                 <div>
                   <Row gutter={16}>
-                    <Col span={4}>
+                    <Col span={3}>
                       <span>响应曲线</span>
                     </Col>
-                    <Col span={5}>
+                    <Col span={4}>
                       <Select placeholder="请选择策略" onChange={() => this.onChange} />
                     </Col>
-                    <Col span={4}>
+                    <Col span={3}>
                       <Button type="primary" onClick={() => this.handleSubmit}>
                         查询
                       </Button>
@@ -115,11 +152,11 @@ export default class responseCurve extends Component {
           </Col>
           <Col span={3}>
             <Row>
-              <Statistic title="SPI" value={93} suffix="" />
+              <Statistic title="SPI" value={'115%'} suffix="" />
             </Row>
             <div style={{ marginTop: 17 }}>
               <Row>
-                <Statistic title="PPI" value={93} suffix="" />
+                <Statistic title="PPI" value={'93%'} suffix="" />
               </Row>
             </div>
           </Col>

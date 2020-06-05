@@ -979,7 +979,7 @@ export default class Detail extends Component {
                   {value ? (
                     <div>
                       响应能力:
-                      {calculateValue}
+                      {/* {calculateValue} */ '215'}
                       kW
                     </div>
                   ) : (
@@ -993,8 +993,10 @@ export default class Detail extends Component {
           <Form labelCol={{ span: 3 }} wrapperCol={{ span: 21 }} name="basic">
             <Form.Item label="响应预估：" name="响应预估">
               <Row gutter={5}>
-                <Col span={16}>{response}</Col>
-
+                {/* <Col span={16}>{response}</Col> */}
+                <Col span={16} className={style.sss}>
+                  {'2020-6-1 12:00-13:00'}
+                </Col>
                 <Col span={5}>
                   <Button type="primary" onClick={this.handleCalculate.bind(this)}>
                     计算
@@ -1004,7 +1006,10 @@ export default class Detail extends Component {
             </Form.Item>
             <Form.Item label="执行策略：" name="执行策略">
               <Row gutter={5}>
-                <Col span={16}>{response}</Col>
+                {/* <Col span={16}>{response}</Col> */}
+                <Col span={16} className={style.sss}>
+                  {'2020-6-1 12:00-13:00'}
+                </Col>
                 <Col span={5}>
                   <Button type="primary" onClick={this.handleSubmit.bind(this)}>
                     执行

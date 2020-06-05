@@ -97,7 +97,7 @@ export default class apear extends Component {
                 )}
               </Form.Item>
               <Form.Item label="响应时间" name="响应时间">
-                {response}
+                {/* {response} */ '2020-6-1 12:00-13:00'}
               </Form.Item>
               <div className={style.button}>
                 <div className={style.button1}>

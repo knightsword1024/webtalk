@@ -87,17 +87,19 @@ export default class MonthComPare extends Component {
       },
       yAxis: {
         type: 'value',
+        name: '用电量/kWh',
         axisLabel: {
           show: true,
           showMinLabel: true,
           showMaxLabel: true,
-          formatter: `{value}${unitValue}`,
+          // formatter: `{value}${unitValue}`,
         },
       },
       series: [
         {
           name: showValue[0],
-          data: monthValue1,
+          // data: monthValue1,
+          data: [9864, 4265, 8972, 8843, 10214, 5517],
           type: 'bar',
           itemStyle: {
             normal: {
@@ -111,7 +113,8 @@ export default class MonthComPare extends Component {
         },
         {
           name: showValue[1],
-          data: monthValue2,
+          // data: monthValue2,
+          data: [10240, 4853, 8250, 9156, 10305, 11579],
           type: 'bar',
           itemStyle: {
             normal: {

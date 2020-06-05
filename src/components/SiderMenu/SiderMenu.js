@@ -103,7 +103,7 @@ export default class SiderMenu extends PureComponent {
         collapsed={collapsed}
         breakpoint="lg"
         onCollapse={onCollapse}
-        width={256}
+        width={180}
         theme={theme}
         className={siderClassName}
       >
@@ -118,7 +118,7 @@ export default class SiderMenu extends PureComponent {
           mode="inline"
           handleOpenChange={this.handleOpenChange}
           onOpenChange={this.handleOpenChange}
-          style={{ padding: '16px 0', width: '100%', overflowX: 'hidden' }}
+          style={{ padding: '16px 0px', width: '100%', overflowX: 'hidden' }}
           {...defaultProps}
         />
       </Sider>
