@@ -1,9 +1,29 @@
 import React, { Component } from 'react';
 import { Statistic, Row, Col } from 'antd';
 import style from './index.less';
-
+import { connect } from 'dva';
+import moment from 'moment';
+@connect(({ result }) => ({ result }))
 export default class card extends Component {
+  componentDidMount = () => {
+    const { dispatch } = this.props;
+    var date = moment().format('YYYY-MM-DD');
+    dispatch({
+      type: 'result/fetchCardValue',
+      payload: { inquireDate: date },
+    });
+  };
   render() {
+    const {
+      result: {
+        responseFreq,
+        responsePower,
+        responseProfit,
+        powerComplete,
+        responseTimeRate,
+        yearCompleteRate,
+      },
+    } = this.props;
     return (
       <div className={style.all}>
         <div className={style.top}>

@@ -53,6 +53,7 @@ export default class Cop extends Component {
         data: COPyValue[i],
         type: 'line',
         smooth: true,
+        stack: '总量',
         areaStyle: {},
         itemStyle: {
           normal: {

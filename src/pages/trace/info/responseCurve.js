@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { Row, Col, Card, Select, Button, Statistic } from 'antd';
 import ReactEcharts from 'echarts-for-react';
+import { connect } from 'dva';
 import style from './index.less';
 
 const { Option } = Select;
+
+@connect(trace => trace)
 export default class responseCurve extends Component {
+  state = {
+    systemId: '',
+  };
+
   getLine = () => {
     const showValue = '11';
     const xValue = [1, 2, 3, 4, 5, 6];
@@ -112,14 +119,24 @@ export default class responseCurve extends Component {
     return option;
   };
   handleSubmit = () => {
-    const { dispatch } = this.props;
+    const {
+      dispatch,
+      trace: { responseId },
+    } = this.props;
+    const { systemId } = this.state;
+    var date = localStorage.getItem('searchTime');
+    dispatch({
+      type: 'trace/fetchLineValue',
+      payload: { responseDate: date, systemId: systemId, responseId: responseId },
+    });
   };
-  onChange = (key, value) => {
-    const { dispatch } = this.props;
-    this.setState({});
-    // dispatch({})
+  onChange = value => {
+    this.setState({ systemId: value });
   };
   render() {
+    const {
+      trace: { PPI, SPI },
+    } = this.props;
     return (
       <div className={style.buttom}>
         <Row gutter={16}>
