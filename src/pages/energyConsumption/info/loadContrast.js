@@ -25,36 +25,29 @@ export default class LoadContrast extends Component {
   createColumn() {
     return [
       {
-        title: '设备名称',
+        title: 'Device Name',
         dataIndex: 'deviceName',
         key: 'deviceName',
       },
       {
-        title: '当日用电',
+        title: 'Daily Electricity',
         dataIndex: 'dayElec',
         key: 'dayElec',
-        // render: row => (
-        //   <div>
-        //     {row.dayElectricity}
-        //     kWh
-        //   </div>
-        // ),
+        align: 'center',
+        width: 130,
       },
       {
-        title: '当月用电',
+        title: 'Monthly Electricity',
         dataIndex: 'monthElec',
         key: 'monthElec',
-        // render: row => (
-        //   <div>
-        //     {row.monthElectricity}
-        //     kWh
-        //   </div>
-        // ),
+        align: 'center',
+        width: 130,
       },
       {
-        title: '占比',
+        title: 'Proportion',
         dataIndex: 'proportion',
         key: 'proportion',
+        align: 'center',
         // render: row => (<div>{row.proportion}%</div>),
       },
     ];
@@ -67,28 +60,28 @@ export default class LoadContrast extends Component {
     const tableValue = [
       {
         key: '1',
-        deviceName: '冷冻水泵',
+        deviceName: 'Chilled water pump',
         dayElec: '432kWh',
         monthElec: '1763kWh',
         proportion: '26%',
       },
       {
         key: '2',
-        deviceName: '冷却水泵',
+        deviceName: 'Cooling water pump',
         dayElec: '367kWh',
         monthElec: '1329kWh',
         proportion: '20%',
       },
       {
         key: '3',
-        deviceName: '冷却塔风机',
+        deviceName: 'Cooling tower fan',
         dayElec: '165kWh',
         monthElec: '752kWh',
         proportion: '11%',
       },
       {
         key: '4',
-        deviceName: '冷水机组',
+        deviceName: 'Water cooling unit ',
         dayElec: '786kWh',
         monthElec: '2916kWh',
         proportion: '43%',
@@ -96,7 +89,7 @@ export default class LoadContrast extends Component {
     ];
     return (
       <div className={style.card}>
-        <Card title="分类负荷对比" bodyStyle={{ height: 280 }}>
+        <Card title="Classification Load Comparison" bodyStyle={{ height: 280 }}>
           <Table
             rowKey={record => record.id}
             columns={this.createColumn()}

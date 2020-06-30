@@ -30,7 +30,7 @@ export default class historyConsum extends Component {
     const unitValue = 's';
     let option = {
       legend: {
-        data: ['认缴负荷', '响应负荷', '获得收益'],
+        data: ['Subscribed Load', 'Responsed Load', 'Geted Benefit'],
       },
       tooltip: {
         trigger: 'axis',
@@ -73,14 +73,14 @@ export default class historyConsum extends Component {
         },
         // data: xValue,
         data: [
-          '2019/7/23',
-          '2019/7/28',
-          '2019/8/3',
-          '2019/8/9',
-          '2019/8/23',
-          '2020/5/10',
-          '2020/5/20',
-          '2020/6/1',
+          '2019/07/23',
+          '2019/07/28',
+          '2019/08/03',
+          '2019/08/09',
+          '2019/08/23',
+          '2020/05/10',
+          '2020/05/20',
+          '2020/06/01',
         ],
       },
       yAxis: [
@@ -93,7 +93,7 @@ export default class historyConsum extends Component {
         // },
         {
           type: 'value',
-          name: '负荷/kW',
+          name: 'Load/kW',
           min: 0,
           max: 350,
           interval: 50,
@@ -103,7 +103,7 @@ export default class historyConsum extends Component {
         },
         {
           type: 'value',
-          name: '收益/元',
+          name: 'Benefit/￥',
           min: 0,
           max: 14000,
           interval: 2000,
@@ -131,19 +131,19 @@ export default class historyConsum extends Component {
         //   },
         // },
         {
-          name: '认缴负荷',
+          name: 'Subscribed Load',
           type: 'bar',
           barWidth: '30%',
           data: [200, 300, 300, 300, 200, 200, 200, 200],
         },
         {
-          name: '响应负荷',
+          name: 'Responsed Load',
           type: 'bar',
           barWidth: '30%',
           data: [223, 315, 304, 310, 210, 206, 218, 230],
         },
         {
-          name: '获得收益',
+          name: 'Geted Benefit',
           type: 'line',
           yAxisIndex: 1,
           data: [6000, 9000, 9000, 9000, 6000, 6000, 6000, 6000],
@@ -156,7 +156,7 @@ export default class historyConsum extends Component {
   render() {
     return (
       <div>
-        <Card title="历史响应统计">
+        <Card title="Historical Response Statistics">
           {/* {this.renderSimpleForm()} */}
           <ReactEcharts
             option={this.getLine()}

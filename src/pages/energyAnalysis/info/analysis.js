@@ -20,7 +20,7 @@ export default class analysis extends Component {
     } = this.props;
     return (
       <div className={style.anaCard}>
-        <Card title="能效分析" style={{ height: 340 }}>
+        <Card title="Energy Efficiency Analysis " style={{ height: 340 }}>
           <div className={style.background}>
             <span className={style.textone}>{EERrB}</span>
             <span className={style.texttwo}>{COPB}</span>

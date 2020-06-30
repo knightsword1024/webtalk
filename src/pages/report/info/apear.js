@@ -73,21 +73,21 @@ export default class apear extends Component {
 
     return (
       <div className={style.apear}>
-        <Card title="响应上报">
+        <Card title="Response Report">
           <div className={style.form2}>
             <Form labelCol={{ span: 10 }} wrapperCol={{ span: 14 }} name="basic">
-              <Form.Item label="是否参与" name="是否参与">
+              <Form.Item label="Participation" name="Participation">
                 <Radio.Group onChange={this.onChangeRadio} value={radioValue}>
-                  <Radio value={1}>是</Radio>
-                  <Radio value={2}>否</Radio>
+                  <Radio value={1}>Yes</Radio>
+                  <Radio value={2}>No</Radio>
                 </Radio.Group>
               </Form.Item>
-              <Form.Item label="认缴负荷" name="认缴负荷">
+              <Form.Item label="Subscribed Load" name="Subscribed Load">
                 {form.getFieldDecorator('payPower', {
                   rules: [
                     {
                       required: true,
-                      message: '请输入认缴负荷',
+                      message: 'Please input the number of subscribed load',
                     },
                   ],
                 })(
@@ -96,17 +96,17 @@ export default class apear extends Component {
                   </div>
                 )}
               </Form.Item>
-              <Form.Item label="响应时间" name="响应时间">
-                {/* {response} */ '2020-6-1 12:00-13:00'}
+              <Form.Item label="Response Time" name="Response Time">
+                {/* {response} */ '2020-06-01 12:00-13:00'}
               </Form.Item>
               <div className={style.button}>
                 <div className={style.button1}>
                   <Button type="primary" onClick={this.handleSubmit}>
-                    上报
+                    report
                   </Button>
                 </div>
                 <div className={style.button2}>
-                  <Button onClick={this.handleDelete}>取消</Button>
+                  <Button onClick={this.handleDelete}>cancel</Button>
                 </div>
               </div>
             </Form>

@@ -43,7 +43,7 @@ export default class Wtfchw extends Component {
         },
       },
       legend: {
-        data: ['商业WTFchw', '办公WTFchw'],
+        data: ['Bussiness', 'Office'],
       },
       dataZoom: [
         {
@@ -86,7 +86,7 @@ export default class Wtfchw extends Component {
       },
       series: [
         {
-          name: '办公WTFchw',
+          name: 'Office',
           data: WTFchwyValueOffice,
           type: 'line',
           smooth: true,
@@ -102,7 +102,7 @@ export default class Wtfchw extends Component {
           },
         },
         {
-          name: '商业WTFchw',
+          name: 'Bussiness',
           data: WTFchwyValueBusi,
           type: 'line',
           smooth: true,
@@ -128,12 +128,12 @@ export default class Wtfchw extends Component {
         <Row gutter={20}>
           <Col span={9}>
             <div className={style.select}>
-              <RangePicker onChange={this.onChangeDate} />
+              <RangePicker onChange={this.onChangeDate} placeholder={['StartDate', 'EndDate']} />
             </div>
           </Col>
           <Col span={4}>
             <Button type="primary" onClick={this.handleSubmit}>
-              查询
+              Search
             </Button>
           </Col>
         </Row>
@@ -159,7 +159,7 @@ export default class Wtfchw extends Component {
   render() {
     return (
       <div>
-        <Card title="冷冻水输送系数(WTFchw)">
+        <Card title="Refrigerated Water Transfer Coefficient">
           {this.renderSimpleForm()}
           <ReactEcharts
             option={this.getLine()}

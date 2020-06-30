@@ -28,39 +28,39 @@ export default class DayComPare extends Component {
     const {
       consumption: { dayValue1, dayValue2 },
     } = this.props;
-    const showValue = ['本月每日能耗', '上月每日能耗'];
+    const showValue = ['This Month', 'Last Month'];
     const xValue = [
-      '1号',
-      '2号',
-      '3号',
-      '4号',
-      '5号',
-      '6号',
-      '7号',
-      '8号',
-      '9号',
-      '10号',
-      '11号',
-      '12号',
-      '13号',
-      '14号',
-      '15号',
-      '16号',
-      '17号',
-      '18号',
-      '19号',
-      '20号',
-      '21号',
-      '22号',
-      '23号',
-      '24号',
-      '25号',
-      '26号',
-      '27号',
-      '28号',
-      '29号',
-      '30号',
-      '31号',
+      '1st',
+      '2nd',
+      '3rd',
+      '4th',
+      '5th',
+      '6th',
+      '7th',
+      '8th',
+      '9th',
+      '10th',
+      '11th',
+      '12th',
+      '13th',
+      '14th',
+      '15th',
+      '16th',
+      '17th',
+      '18th',
+      '19th',
+      '20th',
+      '21th',
+      '22th',
+      '23th',
+      '24th',
+      '25th',
+      '26th',
+      '27th',
+      '28th',
+      '29th',
+      '30th',
+      '31th',
     ];
     const unitValue = 'kWh';
     let option = {
@@ -102,7 +102,7 @@ export default class DayComPare extends Component {
       },
       yAxis: {
         type: 'value',
-        name: '用电量/kWh',
+        name: 'Electricity/kWh',
         axisLabel: {
           show: true,
           showMinLabel: true,
@@ -222,7 +222,7 @@ export default class DayComPare extends Component {
   render() {
     return (
       <div>
-        <Card title="日用电量环比分析">
+        <Card title="Analysis Of Daily Electricity Consumption">
           {/* {this.renderSimpleForm()} */}
           <ReactEcharts
             option={this.getLine()}

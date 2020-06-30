@@ -9,13 +9,13 @@ const FormItem = Form.Item;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const deviceName = {
-  C_CETD10000003_AV_0000: '办公1#机组',
-  C_CETD10000007_AV_0000: '办公2#机组',
-  C_CETD10000008_AV_0000: '办公3#机组',
-  C_CETD10000004_AV_0000: '商业1#机组',
-  C_CETD10000005_AV_0000: '商业2#机组',
-  C_CETD10000006_AV_0000: '商业3#机组',
-  C_CETD10000012_AV_0000: '商业4#机组',
+  C_CETD10000003_AV_0000: 'Office 1#',
+  C_CETD10000007_AV_0000: 'Office 2#',
+  C_CETD10000008_AV_0000: 'Office 3#',
+  C_CETD10000004_AV_0000: 'Bussiness 1#',
+  C_CETD10000005_AV_0000: 'Bussiness 2#',
+  C_CETD10000006_AV_0000: 'Bussiness 3#',
+  C_CETD10000012_AV_0000: 'Bussiness 4#',
 };
 
 @connect(({ analysis }) => ({ analysis }))
@@ -138,24 +138,28 @@ export default class Cop extends Component {
         <Row gutter={20}>
           <Col span={9}>
             <div className={style.select}>
-              <RangePicker onChange={this.onChangeDate} />
+              <RangePicker onChange={this.onChangeDate} placeholder={['StartDate', 'EndDate']} />
             </div>
           </Col>
           <Col span={6}>
             <div className={style.select}>
-              <Select placeholder="办公/商用" onChange={this.onChange} defaultValue={classify}>
+              <Select
+                placeholder="Office/Bussiness"
+                onChange={this.onChange}
+                defaultValue={classify}
+              >
                 <Option key={1} value={1}>
-                  办公
+                  Office
                 </Option>
                 <Option key={2} value={2}>
-                  商用
+                  Bussiness
                 </Option>
               </Select>
             </div>
           </Col>
           <Col span={4}>
             <Button type="primary" onClick={this.handleSubmit}>
-              查询
+              Search
             </Button>
           </Col>
         </Row>
@@ -181,7 +185,7 @@ export default class Cop extends Component {
   render() {
     return (
       <div>
-        <Card title="冷水机组运行效率(COP)">
+        <Card title="Operating Efficiency Of Chiller">
           {this.renderSimpleForm()}
           <ReactEcharts
             option={this.getLine()}

@@ -43,7 +43,7 @@ export default class EERr extends Component {
         },
       },
       legend: {
-        data: ['商用EERr', '办公EERr'],
+        data: ['Bussiness', 'Office'],
       },
       dataZoom: [
         {
@@ -86,7 +86,7 @@ export default class EERr extends Component {
       },
       series: [
         {
-          name: '商用EERr',
+          name: 'Bussiness',
           data: EERryValueBusi,
           type: 'line',
           smooth: true,
@@ -102,7 +102,7 @@ export default class EERr extends Component {
           },
         },
         {
-          name: '办公EERr',
+          name: 'Office',
           data: EERryValueOffice,
           type: 'line',
           smooth: true,
@@ -128,7 +128,7 @@ export default class EERr extends Component {
         <Row gutter={20}>
           <Col span={9}>
             <div className={style.select}>
-              <RangePicker onChange={this.onChangeDate} />
+              <RangePicker onChange={this.onChangeDate} placeholder={['StartDate', 'EndDate']} />
             </div>
           </Col>
           {/* <Col span={6}>
@@ -138,7 +138,7 @@ export default class EERr extends Component {
           </Col> */}
           <Col span={4}>
             <Button type="primary" onClick={this.handleSubmit}>
-              查询
+              Search
             </Button>
           </Col>
         </Row>
@@ -165,7 +165,7 @@ export default class EERr extends Component {
   render() {
     return (
       <div>
-        <Card title="制冷系统能效比(EERr)">
+        <Card title="Energy Efficiency Ratio Of Refrigeration System">
           {this.renderSimpleForm()}
           <ReactEcharts
             option={this.getLine()}

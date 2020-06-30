@@ -43,11 +43,19 @@ export default class LoadContrast extends Component {
       },
       series: [
         {
-          name: '访问来源',
+          name: 'Source',
           type: 'pie',
           radius: '90%',
           center: ['50%', '50%'],
-          data: proportionDate,
+          data: [
+            { value: 335, name: 'Strategy One' },
+            { value: 310, name: 'Strategy Two' },
+            { value: 274, name: 'Strategy Three' },
+            { value: 235, name: 'Strategy Four' },
+            { value: 400, name: 'Strategy Five' },
+          ].sort(function(a, b) {
+            return a.value - b.value;
+          }),
           roseType: 'radius',
           label: {
             color: 'rgba(0, 0, 0, 1)',
@@ -80,11 +88,11 @@ export default class LoadContrast extends Component {
   render() {
     return (
       <div>
-        <Card title="各策略响应负荷占比">
+        <Card title="Response Load Ratio">
           <ReactEcharts
             option={this.getLine()}
             theme="light"
-            style={{ height: '251px', width: '100%' }}
+            style={{ height: '238px', width: '100%' }}
           />
         </Card>
       </div>

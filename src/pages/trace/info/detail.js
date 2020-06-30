@@ -109,29 +109,27 @@ export default class Detail extends Component {
   createColumn() {
     return [
       {
-        title: '策略编号',
-        dataIndex: 'locationid',
-        key: 'locationid',
+        title: 'Strategy Number',
+        dataIndex: 'StrategyNumber',
       },
       {
-        title: '策略名称',
-        dataIndex: 'location1',
-        key: 'location1',
+        title: 'Strategy Name',
+        dataIndex: 'StrategyName',
+        width: 200,
       },
       {
-        title: '执行参数',
-        dataIndex: 'location2',
-        key: 'location2',
+        title: 'Execute',
+        dataIndex: 'Execute',
       },
       {
-        title: '预估响应负荷/kW',
-        dataIndex: 'location3',
-        key: 'location3',
+        title: 'Forecast load/kW',
+        dataIndex: 'Forecastload',
+        align: 'center',
       },
       {
-        title: '实际响应负荷/kW',
-        dataIndex: 'location4',
-        key: 'location4',
+        title: 'Actual Load/kW',
+        dataIndex: 'ActualLoad',
+        align: 'center',
       },
     ];
   }
@@ -140,19 +138,19 @@ export default class Detail extends Component {
     const location = [
       {
         key: '1',
-        locationid: '策略一',
-        location1: '关停主机和对应的冷却系统',
-        location2: '办公：1台',
-        location3: '208',
-        location4: '230',
+        StrategyNumber: 'Strategy One',
+        StrategyName: 'Shut down the main engine and corresponding cooling system',
+        Execute: 'Office：1',
+        Forecastload: '208',
+        ActualLoad: '230',
       },
       {
         key: '1',
-        locationid: '策略二',
-        location1: '挺高冷水机组的出水温度',
-        location2: '办公：12℃',
-        location3: '32',
-        location4: '230',
+        StrategyNumber: 'Strategy Two',
+        StrategyName: 'Increase the water outlet temperature of the chiller',
+        Execute: 'Office：12℃',
+        Forecastload: '32',
+        ActualLoad: '230',
       },
     ];
     return (
@@ -163,15 +161,15 @@ export default class Detail extends Component {
               title={
                 <div>
                   <Row gutter={16}>
-                    <Col span={3}>
-                      <span>实施细节</span>
+                    <Col span={5}>
+                      <span>Implementation Details</span>
                     </Col>
-                    <Col span={3}>
-                      <DatePicker style={{ width: '120px' }} />
+                    <Col span={4}>
+                      <DatePicker style={{ width: '150px' }} placeholder={'Please select date'} />
                     </Col>
                     <Col span={3}>
                       <Button type="primary" onClick={this.handleSubmit}>
-                        查询
+                        Inquire
                       </Button>
                     </Col>
                   </Row>
@@ -181,27 +179,27 @@ export default class Detail extends Component {
               <Col span={8}>
                 <div className={style.form}>
                   <Form labelCol={{ span: 10 }} wrapperCol={{ span: 14 }} name="basic">
-                    <Form.Item label="要求负荷" name="要求负荷">
+                    <Form.Item label="Required Load" name="要求负荷">
                       {/* {value} */ '200'}
                       kW
                     </Form.Item>
 
-                    <Form.Item label="响应时间" name="响应时间">
-                      {/* {value} */ '2020-6-1 12:00-13:00'}
+                    <Form.Item label="Responsed Time" name="响应时间">
+                      {/* {value} */ '2020-06-01 12:00-13:00'}
                     </Form.Item>
-                    <Form.Item label="认缴负荷" name="认缴负荷">
+                    <Form.Item label="Subscribed Load" name="认缴负荷">
                       {/* {value} */ '200'}
                       kW
                     </Form.Item>
-                    <Form.Item label="削减负荷" name="削减负荷">
+                    <Form.Item label="Reduced Load" name="削减负荷">
                       {/* {value} */ '230'}
                       kW
                     </Form.Item>
-                    <Form.Item label="执行时间" name="执行时间">
-                      {/* {value} */ '2020-6-1 12:00-13:00'}
+                    <Form.Item label="Execute Time" name="执行时间">
+                      {/* {value} */ '2020-06-01 12:00-13:00'}
                     </Form.Item>
-                    <Form.Item label="获得收益" name="获得收益">
-                      {/* {value}元 */ '6000元'}
+                    <Form.Item label="Geted Benefit" name="获得收益">
+                      {/* {value}元 */ '￥6000'}
                     </Form.Item>
                   </Form>
                 </div>

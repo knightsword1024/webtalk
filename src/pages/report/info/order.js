@@ -55,25 +55,25 @@ export default class order extends Component {
     } = this.props;
     return (
       <div>
-        <Card title="电网指令">
+        <Card title="Grid Instruction">
           <div className={style.form}>
             <Form labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} name="basic">
-              <Form.Item label="响应类型" name="响应类型">
-                {/* {resType[responseType]} */ '削峰'}
+              <Form.Item label="Response Type" name="Response Type">
+                {/* {resType[responseType]} */ 'Peak Clipping'}
               </Form.Item>
-              <Form.Item label="响应方式" name="响应方式">
-                {/* {resMode[responseMode]} */ '约定需求响应'}
+              <Form.Item label="Response Mode" name="Response Mode">
+                {/* {resMode[responseMode]} */ 'Contract Demand Response'}
               </Form.Item>
-              <Form.Item label="响应开始时间" name="响应开始时间">
-                {/* {responseStartTime} */ '2020-6-1 12:00'}
+              <Form.Item label="Response Starttime" name="Response Starttime">
+                {/* {responseStartTime} */ '2020-06-01 12:00'}
               </Form.Item>
-              <Form.Item label="响应功率" name="响应功率">
+              <Form.Item label="Response Power" name="Response Power">
                 {/* {responsePower} */ '200'}
                 kW
               </Form.Item>
-              <Form.Item label="响应时间" name="响应时间">
+              <Form.Item label="Response Time" name="Response Time">
                 {/* {responseTime} */ '60'}
-                分钟
+                mins
               </Form.Item>
             </Form>
           </div>

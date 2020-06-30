@@ -28,7 +28,7 @@ export default class responseCurve extends Component {
         },
       },
       legend: {
-        data: ['基线负荷', '实际负荷', '响应负荷'],
+        data: ['Baseline Load', 'Actual Load', 'Response Load'],
       },
       dataZoom: [
         {
@@ -97,19 +97,19 @@ export default class responseCurve extends Component {
         //   },
         // },
         {
-          name: '基线负荷',
+          name: 'Baseline Load',
           type: 'line',
           areaStyle: {},
           data: [1250, 1196, 1284, 1263, 1225, 1185, 1194, 1236, 1201, 1183, 1214, 1252, 1200],
         },
         {
-          name: '实际负荷',
+          name: 'Actual Load',
           type: 'line',
           areaStyle: {},
           data: [1040, 981, 1048, 1021, 977, 936, 957, 1016, 976, 962, 988, 1034, 984],
         },
         {
-          name: '响应负荷',
+          name: 'Response Load',
           type: 'bar',
           // yAxisIndex: 1,
           data: [210, 215, 236, 242, 248, 246, 237, 220, 225, 221, 226, 218, 216],
@@ -145,15 +145,19 @@ export default class responseCurve extends Component {
               title={
                 <div>
                   <Row gutter={16}>
-                    <Col span={3}>
-                      <span>响应曲线</span>
-                    </Col>
                     <Col span={4}>
-                      <Select placeholder="请选择策略" onChange={() => this.onChange} />
+                      <span>Response Curve</span>
+                    </Col>
+                    <Col span={5}>
+                      <Select
+                        className={style.select}
+                        placeholder="Please select strategy"
+                        onChange={() => this.onChange}
+                      />
                     </Col>
                     <Col span={3}>
                       <Button type="primary" onClick={() => this.handleSubmit}>
-                        查询
+                        Search
                       </Button>
                     </Col>
                   </Row>

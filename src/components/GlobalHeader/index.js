@@ -33,7 +33,7 @@ export default class GlobalHeader extends PureComponent {
         />
         <Link to="/" className={styles.logo} key="logo">
           <img src={logo} alt="logo" width="32" />
-          <span>用户侧建筑需求响应管理系统</span>
+          <span>Demand Response Management System</span>
         </Link>
         <RightContent {...this.props} />
       </div>

@@ -85,7 +85,7 @@ export default class baseLine extends Component {
       },
       yAxis: {
         type: 'value',
-        name: '负荷/kW',
+        name: 'Load/kW',
         axisLabel: {
           show: true,
           showMinLabel: true,
@@ -136,16 +136,16 @@ export default class baseLine extends Component {
     } = this.props;
     return (
       <div>
-        <Card title="基线负荷">
+        <Card title="Baseline Load">
           <div>
             <div className={style.label1}>
-              基线最大负荷：
+              Max Load：
               {/* {maxValue} */ '1284'}
               kW
             </div>
             &nbsp;&nbsp;
             <div className={style.label2}>
-              基线平均负荷：
+              Mean Load：
               {/* {aveValue} */ '1222'}
               kW
             </div>

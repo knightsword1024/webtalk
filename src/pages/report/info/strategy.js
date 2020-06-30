@@ -11,33 +11,33 @@ const { RangePicker } = DatePicker;
 const data = [
   {
     key: '0',
-    strategyId: '策略一',
-    strategyName: '关停主机和对应的冷却系统',
+    strategyId: 'One',
+    strategyName: 'Shut down the main engine and corresponding cooling system',
   },
   {
     key: '1',
-    strategyId: '策略二',
-    strategyName: '提高冷水机组的出水温度',
+    strategyId: 'Two',
+    strategyName: 'Increase the water outlet temperature of the chiller',
   },
   {
     key: '2',
-    strategyId: '策略三',
-    strategyName: '预制冷',
+    strategyId: 'Three',
+    strategyName: 'Pre cooling',
   },
   {
     key: '3',
-    strategyId: '策略四',
-    strategyName: '关闭新风系统',
+    strategyId: 'Four',
+    strategyName: 'Shut down the fresh air system',
   },
   {
     key: '4',
-    strategyId: '策略五',
-    strategyName: '提高空调末端设定温度',
+    strategyId: 'Five',
+    strategyName: 'Increase the air conditioning terminal setting temperature',
   },
   {
     key: '5',
-    strategyId: '策略六',
-    strategyName: '关闭公共照明',
+    strategyId: 'Six',
+    strategyName: 'Turn off public lighting system',
   },
 ];
 
@@ -103,21 +103,23 @@ class CreateForm extends Component {
     } = this.props;
     return (
       <Modal
-        title={'请选择要设置的参数'}
+        title={'Please select the parameters to set'}
         visible={modalVisible}
         onCancel={() => {
           handleModalVisible(false, '');
         }}
         onOk={() => this.okHandle()}
+        cancelText="cancel"
+        okText="ok"
         destroyOnClose
       >
         {rowValue.key == 0 ? (
           <div>
-            <FormItem label="办公" labelCol={{ span: 9 }} wrapperCol={{ span: 12 }}>
+            <FormItem label="Office" labelCol={{ span: 9 }} wrapperCol={{ span: 12 }}>
               {form.getFieldDecorator('engineB')(
                 <div className={style.select}>
                   <Select
-                    placeholder="请选择数量"
+                    placeholder="Please select the number"
                     defaultValue={engineB}
                     onChange={event => {
                       onChangeModalValue('engineB', event);
@@ -133,15 +135,14 @@ class CreateForm extends Component {
                       3
                     </Option>
                   </Select>
-                  <span>台</span>
                 </div>
               )}
             </FormItem>
-            <FormItem label="商用" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+            <FormItem label="Bussiness" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
               {form.getFieldDecorator('engineS')(
                 <div className={style.select}>
                   <Select
-                    placeholder="请选择数量"
+                    placeholder="Please select the number"
                     defaultValue={engineS}
                     onChange={event => {
                       onChangeModalValue('engineS', event);
@@ -160,7 +161,6 @@ class CreateForm extends Component {
                       4
                     </Option>
                   </Select>
-                  <span>台</span>
                 </div>
               )}
             </FormItem>
@@ -170,11 +170,11 @@ class CreateForm extends Component {
         )}
         {rowValue.key == 1 ? (
           <div>
-            <FormItem label="办公" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+            <FormItem label="Office" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
               {form.getFieldDecorator('outTemB')(
                 <div className={style.select}>
                   <Select
-                    placeholder="请选择温度"
+                    placeholder="Please select the number of temperature"
                     defaultValue={outTemB}
                     onChange={event => {
                       onChangeModalValue('outTemB', event);
@@ -203,11 +203,11 @@ class CreateForm extends Component {
                 </div>
               )}
             </FormItem>
-            <FormItem label="商用" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+            <FormItem label="bussiness" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
               {form.getFieldDecorator('outTemS')(
                 <div className={style.select}>
                   <Select
-                    placeholder="请选择温度"
+                    placeholder="Please select the number of temperature"
                     defaultValue={outTemS}
                     onChange={event => {
                       onChangeModalValue('outTemS', event);
@@ -242,11 +242,11 @@ class CreateForm extends Component {
         )}
         {rowValue.key == 2 ? (
           <div>
-            <FormItem label="预制冷时间" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+            <FormItem label="Precooling Time" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
               {form.getFieldDecorator('presetTime')(
                 <div className={style.select}>
                   <Select
-                    placeholder="请选择时间"
+                    placeholder="Please select the time of precooling"
                     defaultValue={presetTime}
                     onChange={event => {
                       onChangeModalValue('presetTime', event);
@@ -262,16 +262,16 @@ class CreateForm extends Component {
                       60
                     </Option>
                   </Select>
-                  <span>分钟</span>
+                  <span>mins</span>
                 </div>
               )}
             </FormItem>
-            <div style={{ marginLeft: 95 }}>提高出水温度</div>
-            <FormItem label="办公" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+            <div style={{ marginLeft: 95 }}>Raise outlet temperature</div>
+            <FormItem label="Office" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
               {form.getFieldDecorator('presetOutTemB')(
                 <div className={style.select}>
                   <Select
-                    placeholder="请选择温度"
+                    placeholder="Please select the number of temperature"
                     defaultValue={presetOutTemB}
                     onChange={event => {
                       onChangeModalValue('presetOutTemB', event);
@@ -300,32 +300,32 @@ class CreateForm extends Component {
                 </div>
               )}
             </FormItem>
-            <FormItem label="商用" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+            <FormItem label="Bussiness" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
               {form.getFieldDecorator('presetOutTemS')(
                 <div className={style.select}>
                   <Select
-                    placeholder="请选择温度"
+                    placeholder="Please select the number of temperature"
                     defaultValue={presetOutTemS}
                     onChange={event => {
                       onChangeModalValue('presetOutTemS', event);
                     }}
                   >
-                    <Option key={1} value={7}>
+                    <Option key={10} value={7}>
                       7
                     </Option>
-                    <Option key={2} value={8}>
+                    <Option key={11} value={8}>
                       8
                     </Option>
-                    <Option key={3} value={9}>
+                    <Option key={12} value={9}>
                       9
                     </Option>
-                    <Option key={4} value={10}>
+                    <Option key={13} value={10}>
                       10
                     </Option>
-                    <Option key={5} value={11}>
+                    <Option key={14} value={11}>
                       11
                     </Option>
-                    <Option key={6} value={12}>
+                    <Option key={15} value={12}>
                       12
                     </Option>
                   </Select>
@@ -333,36 +333,36 @@ class CreateForm extends Component {
                 </div>
               )}
             </FormItem>
-            <div style={{ marginLeft: 95 }}>末端设定温度</div>
-            <FormItem label="办公" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+            <div style={{ marginLeft: 95 }}>Terminal setting temperature</div>
+            <FormItem label="Office" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
               {form.getFieldDecorator('presetEndTemB')(
                 <div className={style.select}>
                   <Select
-                    placeholder="请选择温度"
+                    placeholder="Please select the number of temperature"
                     defaultValue={presetEndTemB}
                     onChange={event => {
                       onChangeModalValue('presetEndTemB', event);
                     }}
                   >
-                    <Option key={1} value={22}>
+                    <Option key={16} value={22}>
                       22
                     </Option>
-                    <Option key={2} value={23}>
+                    <Option key={17} value={23}>
                       23
                     </Option>
-                    <Option key={3} value={24}>
+                    <Option key={18} value={24}>
                       24
                     </Option>
-                    <Option key={4} value={25}>
+                    <Option key={19} value={25}>
                       25
                     </Option>
-                    <Option key={5} value={26}>
+                    <Option key={20} value={26}>
                       26
                     </Option>
-                    <Option key={6} value={27}>
+                    <Option key={21} value={27}>
                       27
                     </Option>
-                    <Option key={6} value={28}>
+                    <Option key={22} value={28}>
                       28
                     </Option>
                   </Select>
@@ -370,35 +370,35 @@ class CreateForm extends Component {
                 </div>
               )}
             </FormItem>
-            <FormItem label="商用" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+            <FormItem label="Bussiness" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
               {form.getFieldDecorator('presetEndTemS')(
                 <div className={style.select}>
                   <Select
-                    placeholder="请选择温度"
+                    placeholder="Please select the number of temperature"
                     defaultValue={presetEndTemS}
                     onChange={event => {
                       onChangeModalValue('presetEndTemS', event);
                     }}
                   >
-                    <Option key={1} value={22}>
+                    <Option key={23} value={22}>
                       22
                     </Option>
-                    <Option key={2} value={23}>
+                    <Option key={24} value={23}>
                       23
                     </Option>
-                    <Option key={3} value={24}>
+                    <Option key={25} value={24}>
                       24
                     </Option>
-                    <Option key={4} value={25}>
+                    <Option key={26} value={25}>
                       25
                     </Option>
-                    <Option key={5} value={26}>
+                    <Option key={27} value={26}>
                       26
                     </Option>
-                    <Option key={6} value={27}>
+                    <Option key={28} value={27}>
                       27
                     </Option>
-                    <Option key={6} value={28}>
+                    <Option key={29} value={28}>
                       28
                     </Option>
                   </Select>
@@ -417,80 +417,82 @@ class CreateForm extends Component {
               onChangeModalValue('newTrand', event);
             }}
           >
-            <Radio value={0}>办公</Radio>
-            <Radio value={1}>商用</Radio>
+            <Radio value={0}>Office</Radio>
+            <Radio value={1}>Bussiness</Radio>
           </Radio.Group>
         ) : (
           <div />
         )}
         {rowValue.key == 4 ? (
           <div>
-            <FormItem label="办公" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+            <FormItem label="Office" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
               {form.getFieldDecorator('endTemB')(
                 <div className={style.select}>
                   <Select
-                    placeholder="请选择温度"
+                    placeholder="Please select the number of temperature"
                     defaultValue={endTemB}
                     onChange={event => {
                       onChangeModalValue('endTemB', event);
                     }}
-                  />
-                  <Option key={1} value={22}>
-                    22
-                  </Option>
-                  <Option key={2} value={23}>
-                    23
-                  </Option>
-                  <Option key={3} value={24}>
-                    24
-                  </Option>
-                  <Option key={4} value={25}>
-                    25
-                  </Option>
-                  <Option key={5} value={26}>
-                    26
-                  </Option>
-                  <Option key={6} value={27}>
-                    27
-                  </Option>
-                  <Option key={6} value={28}>
-                    28
-                  </Option>
+                  >
+                    <Option key={30} value={22}>
+                      22
+                    </Option>
+                    <Option key={31} value={23}>
+                      23
+                    </Option>
+                    <Option key={32} value={24}>
+                      24
+                    </Option>
+                    <Option key={33} value={25}>
+                      25
+                    </Option>
+                    <Option key={34} value={26}>
+                      26
+                    </Option>
+                    <Option key={35} value={27}>
+                      27
+                    </Option>
+                    <Option key={36} value={28}>
+                      28
+                    </Option>
+                  </Select>
                   <span>℃</span>
                 </div>
               )}
             </FormItem>
-            <FormItem label="商用" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
+            <FormItem label="Bussiness" labelCol={{ span: 9 }} wrapperCol={{ span: 11 }}>
               {form.getFieldDecorator('endTemS')(
                 <div className={style.select}>
                   <Select
-                    placeholder="请选择温度"
+                    placeholder="Please select the number of temperature"
                     defaultValue={endTemS}
                     onChange={event => {
                       onChangeModalValue('endTemS', event);
                     }}
-                  />
-                  <Option key={1} value={22}>
-                    22
-                  </Option>
-                  <Option key={2} value={23}>
-                    23
-                  </Option>
-                  <Option key={3} value={24}>
-                    24
-                  </Option>
-                  <Option key={4} value={25}>
-                    25
-                  </Option>
-                  <Option key={5} value={26}>
-                    26
-                  </Option>
-                  <Option key={6} value={27}>
-                    27
-                  </Option>
-                  <Option key={6} value={28}>
-                    28
-                  </Option>
+                  >
+                    <Option key={37} value={22}>
+                      22
+                    </Option>
+                    <Option key={38} value={23}>
+                      23
+                    </Option>
+                    <Option key={39} value={24}>
+                      24
+                    </Option>
+                    <Option key={40} value={25}>
+                      25
+                    </Option>
+                    <Option key={41} value={26}>
+                      26
+                    </Option>
+                    <Option key={42} value={27}>
+                      27
+                    </Option>
+                    <Option key={43} value={28}>
+                      28
+                    </Option>
+                  </Select>
                   <span>℃</span>
                 </div>
               )}
@@ -507,8 +509,8 @@ class CreateForm extends Component {
                 onChangeModalValue('lighting', event);
               }}
             >
-              <Radio value={0}>办公</Radio>
-              <Radio value={1}>商用</Radio>
+              <Radio value={0}>Office</Radio>
+              <Radio value={1}>Bussiness</Radio>
             </Radio.Group>
           </div>
         ) : (
@@ -552,17 +554,17 @@ export default class Detail extends Component {
   createColumn() {
     return [
       {
-        title: '策略编号',
+        title: 'Policy Number',
         dataIndex: 'strategyId',
         width: 100,
       },
       {
-        title: '策略名称',
+        title: 'Policy Name',
         dataIndex: 'strategyName',
       },
       {
-        title: '执行参数',
-        render: row => <a onClick={() => this.handleModalVisible(true, row)}>编辑</a>,
+        title: 'Perform Parameter',
+        render: row => <a onClick={() => this.handleModalVisible(true, row)}>Edit</a>,
         width: 100,
       },
     ];
@@ -840,9 +842,9 @@ export default class Detail extends Component {
     } = this.props;
     if (exePower == 1) {
       return Modal.confirm({
-        title: `确定提交响应策略吗？`,
-        cancelText: '取消',
-        okText: '确定',
+        title: `Are you sure to submit?`,
+        cancelText: 'cancel',
+        okText: 'ok',
         onOk: () => {
           var sendValue = [];
           var value0 = {};
@@ -921,9 +923,9 @@ export default class Detail extends Component {
       });
     } else {
       return Modal.confirm({
-        title: `需求响应能力已关闭`,
-        cancelText: '取消',
-        okText: '确定',
+        title: `The demand response capability is turned off`,
+        cancelText: 'cancel',
+        okText: 'ok',
       });
     }
   };
@@ -973,13 +975,12 @@ export default class Detail extends Component {
             <div>
               <Row gutter={16}>
                 <Col span={11}>
-                  <span>实施细节</span>
+                  <span>Implementation Details</span>
                 </Col>
                 <Col span={7}>
                   {value ? (
                     <div>
-                      响应能力:
-                      {/* {calculateValue} */ '215'}
+                      Responsiveness :{/* {calculateValue} */ '215'}
                       kW
                     </div>
                   ) : (
@@ -990,29 +991,29 @@ export default class Detail extends Component {
             </div>
           }
         >
-          <Form labelCol={{ span: 3 }} wrapperCol={{ span: 21 }} name="basic">
-            <Form.Item label="响应预估：" name="响应预估">
+          <Form labelCol={{ span: 5 }} wrapperCol={{ span: 19 }} name="basic">
+            <Form.Item label="EstimateTime: " name="estimate ">
               <Row gutter={5}>
                 {/* <Col span={16}>{response}</Col> */}
                 <Col span={16} className={style.sss}>
-                  {'2020-6-1 12:00-13:00'}
+                  {'2020-06-01 12:00-13:00'}
                 </Col>
                 <Col span={5}>
                   <Button type="primary" onClick={this.handleCalculate.bind(this)}>
-                    计算
+                    Calculate
                   </Button>
                 </Col>
               </Row>
             </Form.Item>
-            <Form.Item label="执行策略：" name="执行策略">
+            <Form.Item label="ExecuteTime:" name="Execute">
               <Row gutter={5}>
                 {/* <Col span={16}>{response}</Col> */}
                 <Col span={16} className={style.sss}>
-                  {'2020-6-1 12:00-13:00'}
+                  {'2020-06-01 12:00-13:00'}
                 </Col>
                 <Col span={5}>
                   <Button type="primary" onClick={this.handleSubmit.bind(this)}>
-                    执行
+                    Execute
                   </Button>
                 </Col>
               </Row>

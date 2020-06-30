@@ -32,20 +32,20 @@ export default class MonthComPare extends Component {
     const {
       consumption: { monthValue1, monthValue2 },
     } = this.props;
-    const showValue = ['今年每月能耗', '去年每月能耗'];
+    const showValue = ['This Year', 'Last Year'];
     const xValue = [
-      '1月',
-      '2月',
-      '3月',
-      '4月',
-      '5月',
-      '6月',
-      '7月',
-      '8月',
-      '9月',
-      '10月',
-      '11月',
-      '12月',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sept',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     const unitValue = 'kWh';
     let option = {
@@ -87,7 +87,7 @@ export default class MonthComPare extends Component {
       },
       yAxis: {
         type: 'value',
-        name: '用电量/kWh',
+        name: 'Electricity/kWh',
         axisLabel: {
           show: true,
           showMinLabel: true,
@@ -172,7 +172,7 @@ export default class MonthComPare extends Component {
   render() {
     return (
       <div>
-        <Card title="月用电量同比分析">
+        <Card title="Analysis Of Monthly Electricity Consumption">
           {/* {this.renderSimpleForm()} */}
           <ReactEcharts
             option={this.getLine()}

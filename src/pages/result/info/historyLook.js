@@ -29,31 +29,31 @@ export default class historyLook extends Component {
   createColumn() {
     return [
       {
-        title: '响应时间',
+        title: 'Response Time',
         dataIndex: 'responseTime',
         // width: 120,
       },
       {
-        title: '要求负荷',
-        dataIndex: 'location1',
+        title: 'Required Load',
+        dataIndex: 'RequiredLoad',
       },
       {
-        title: '认缴负荷',
-        dataIndex: 'location2',
+        title: 'Subscribed Load',
+        dataIndex: 'SubscribedLoad',
       },
       {
-        title: '响应负荷',
-        dataIndex: 'location3',
+        title: 'Responsed Load',
+        dataIndex: 'ResponseLoad',
       },
       {
-        title: '获得收益',
-        dataIndex: 'location4',
+        title: 'Geted Benefit',
+        dataIndex: 'GetedBenefit',
       },
       {
-        title: '查看',
+        title: 'Look',
         render: row => (
           <div>
-            <a onClick={() => this.lookData(row)}>查看</a>
+            <a onClick={() => this.lookData(row)}>Look</a>
           </div>
         ),
       },
@@ -74,14 +74,14 @@ export default class historyLook extends Component {
       <div style={{ marginLeft: 0 }}>
         <Fragment>
           <Row gutter={20}>
-            <Col span={11}>
+            <Col span={18}>
               <div className={style.select} style={{ width: 200 }}>
-                <RangePicker onChange={this.onChangeDate} />
+                <RangePicker onChange={this.onChangeDate} placeholder={['StartTime', 'EndTime']} />
               </div>
             </Col>
-            <Col span={5}>
+            <Col span={6}>
               <Button type="primary" onClick={this.handleSubmit}>
-                查询
+                Inquire
               </Button>
             </Col>
           </Row>
@@ -106,27 +106,27 @@ export default class historyLook extends Component {
     const location = [
       {
         key: '1',
-        responseTime: '2020-5-10 12:00-13:00',
-        location1: '200kWh',
-        location2: '200kWh',
-        location3: '206kWh',
-        location4: '6000元',
+        responseTime: '2020-05-10 12:00-13:00',
+        RequiredLoad: '200kWh',
+        SubscribedLoad: '200kWh',
+        ResponseLoad: '206kWh',
+        GetedBenefit: '￥6000',
       },
       {
         key: '2',
-        responseTime: '2020-5-20 12:00-13:00',
-        location1: '200kWh',
-        location2: '200kWh',
-        location3: '218kWh',
-        location4: '6000元',
+        responseTime: '2020-05-20 12:00-13:00',
+        RequiredLoad: '200kWh',
+        SubscribedLoad: '200kWh',
+        ResponseLoad: '218kWh',
+        GetedBenefit: '￥6000',
       },
       {
         key: '3',
-        responseTime: '2020-6-1 12:00-13:00',
-        location1: '200kWh',
-        location2: '200kWh',
-        location3: '230kWh',
-        location4: '6000元',
+        responseTime: '2020-06-01 12:00-13:00',
+        RequiredLoad: '200kWh',
+        SubscribedLoad: '200kWh',
+        ResponseLoad: '230kWh',
+        GetedBenefit: '￥6000',
       },
     ];
     return (
@@ -135,10 +135,10 @@ export default class historyLook extends Component {
           title={
             <div>
               <Row gutter={16}>
-                <Col span={5}>
-                  <span>实施细节</span>
+                <Col span={11}>
+                  <span>Implementation Details</span>
                 </Col>
-                <Col span={19}>{this.renderSimpleForm()}</Col>
+                <Col span={12}>{this.renderSimpleForm()}</Col>
               </Row>
             </div>
           }
@@ -149,6 +149,7 @@ export default class historyLook extends Component {
             columns={this.createColumn()}
             //   dataSource={locationList}
             dataSource={location}
+            scroll={{ y: 133 }}
           />
         </Card>
       </div>

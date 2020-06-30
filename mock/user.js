@@ -2,9 +2,8 @@
 export default {
   // 支持值为 Object 和 Array
   'GET /api/currentUser': {
-    name: '设备管理员',
-    avatar:
-      'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+    name: 'Keeper',
+    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
     userid: '00000001',
     email: 'antdesign@alipay.com',
     signature: '海纳百川，有容乃大',
@@ -13,43 +12,43 @@ export default {
     tags: [
       {
         key: '0',
-        label: '很有想法的'
+        label: '很有想法的',
       },
       {
         key: '1',
-        label: '专注设计'
+        label: '专注设计',
       },
       {
         key: '2',
-        label: '辣~'
+        label: '辣~',
       },
       {
         key: '3',
-        label: '大长腿'
+        label: '大长腿',
       },
       {
         key: '4',
-        label: '川妹子'
+        label: '川妹子',
       },
       {
         key: '5',
-        label: '海纳百川'
-      }
+        label: '海纳百川',
+      },
     ],
     notifyCount: 12,
     country: 'China',
     geographic: {
       province: {
         label: '浙江省',
-        key: '330000'
+        key: '330000',
       },
       city: {
         label: '杭州市',
-        key: '330100'
-      }
+        key: '330100',
+      },
     },
     address: '西湖区工专路 77 号',
-    phone: '0752-268888888'
+    phone: '0752-268888888',
   },
   // GET POST 可省略
   'GET /api/users': [
@@ -57,47 +56,47 @@ export default {
       key: '1',
       name: 'John Brown',
       age: 32,
-      address: 'New York No. 1 Lake Park'
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '2',
       name: 'Jim Green',
       age: 42,
-      address: 'London No. 1 Lake Park'
+      address: 'London No. 1 Lake Park',
     },
     {
       key: '3',
       name: 'Joe Black',
       age: 32,
-      address: 'Sidney No. 1 Lake Park'
-    }
+      address: 'Sidney No. 1 Lake Park',
+    },
   ],
   'POST /api/login/account': (req, res) => {
-    const { password, userName, type } = req.body
+    const { password, userName, type } = req.body;
     if (password === '888888' && userName === 'admin') {
       res.send({
         status: 'ok',
         type,
-        currentAuthority: 'admin'
-      })
-      return
+        currentAuthority: 'admin',
+      });
+      return;
     }
     if (password === '123456' && userName === 'user') {
       res.send({
         status: 'ok',
         type,
-        currentAuthority: 'user'
-      })
-      return
+        currentAuthority: 'user',
+      });
+      return;
     }
     res.send({
       status: 'error',
       type,
-      currentAuthority: 'guest'
-    })
+      currentAuthority: 'guest',
+    });
   },
   'POST /api/register': (req, res) => {
-    res.send({ status: 'ok', currentAuthority: 'user' })
+    res.send({ status: 'ok', currentAuthority: 'user' });
   },
   'GET /api/500': (req, res) => {
     res.status(500).send({
@@ -105,8 +104,8 @@ export default {
       status: 500,
       error: 'error',
       message: 'error',
-      path: '/base/category/list'
-    })
+      path: '/base/category/list',
+    });
   },
   'GET /api/404': (req, res) => {
     res.status(404).send({
@@ -114,8 +113,8 @@ export default {
       status: 404,
       error: 'Not Found',
       message: 'No message available',
-      path: '/base/category/list/2121212'
-    })
+      path: '/base/category/list/2121212',
+    });
   },
   'GET /api/403': (req, res) => {
     res.status(403).send({
@@ -123,8 +122,8 @@ export default {
       status: 403,
       error: 'Unauthorized',
       message: 'Unauthorized',
-      path: '/base/category/list'
-    })
+      path: '/base/category/list',
+    });
   },
   'GET /api/401': (req, res) => {
     res.status(401).send({
@@ -132,8 +131,8 @@ export default {
       status: 401,
       error: 'Unauthorized',
       message: 'Unauthorized',
-      path: '/base/category/list'
-    })
+      path: '/base/category/list',
+    });
   },
   'POST /api/query/prototype': (req, res) => {
     res.send({
@@ -144,7 +143,7 @@ export default {
           infallTem: 24,
           insideTem: 22,
           outsideTem: 10,
-          valveOpening: 79
+          valveOpening: 79,
         },
         {
           doorNum: 102,
@@ -152,7 +151,7 @@ export default {
           infallTem: 24,
           insideTem: 22,
           outsideTem: 10,
-          valveOpening: 79
+          valveOpening: 79,
         },
         {
           doorNum: 201,
@@ -160,7 +159,7 @@ export default {
           infallTem: 24,
           insideTem: 22,
           outsideTem: 10,
-          valveOpening: 79
+          valveOpening: 79,
         },
         {
           doorNum: 202,
@@ -168,7 +167,7 @@ export default {
           infallTem: 24,
           insideTem: 22,
           outsideTem: 10,
-          valveOpening: 79
+          valveOpening: 79,
         },
         {
           doorNum: 301,
@@ -176,7 +175,7 @@ export default {
           infallTem: 24,
           insideTem: 22,
           outsideTem: 10,
-          valveOpening: 79
+          valveOpening: 79,
         },
         {
           doorNum: 302,
@@ -184,7 +183,7 @@ export default {
           infallTem: 24,
           insideTem: 22,
           outsideTem: 10,
-          valveOpening: 79
+          valveOpening: 79,
         },
         {
           doorNum: 401,
@@ -192,7 +191,7 @@ export default {
           infallTem: 24,
           insideTem: 22,
           outsideTem: 10,
-          valveOpening: 79
+          valveOpening: 79,
         },
         {
           doorNum: 402,
@@ -200,7 +199,7 @@ export default {
           infallTem: 24,
           insideTem: 22,
           outsideTem: 10,
-          valveOpening: 79
+          valveOpening: 79,
         },
         {
           doorNum: 501,
@@ -208,7 +207,7 @@ export default {
           infallTem: 24,
           insideTem: 22,
           outsideTem: 10,
-          valveOpening: 79
+          valveOpening: 79,
         },
         {
           doorNum: 502,
@@ -216,7 +215,7 @@ export default {
           infallTem: 24,
           insideTem: 22,
           outsideTem: 10,
-          valveOpening: 79
+          valveOpening: 79,
         },
         {
           doorNum: 601,
@@ -224,7 +223,7 @@ export default {
           infallTem: 24,
           insideTem: 22,
           outsideTem: 10,
-          valveOpening: 79
+          valveOpening: 79,
         },
         {
           doorNum: 602,
@@ -232,7 +231,7 @@ export default {
           infallTem: 24,
           insideTem: 22,
           outsideTem: 10,
-          valveOpening: 79
+          valveOpening: 79,
         },
         {
           doorNum: 701,
@@ -240,7 +239,7 @@ export default {
           infallTem: 24,
           insideTem: 22,
           outsideTem: 10,
-          valveOpening: 79
+          valveOpening: 79,
         },
         {
           doorNum: 702,
@@ -248,10 +247,10 @@ export default {
           infallTem: 24,
           insideTem: 22,
           outsideTem: 10,
-          valveOpening: 79
-        }
-      ]
-    })
+          valveOpening: 79,
+        },
+      ],
+    });
   },
   'POST /api/query/collapse': (req, res) => {
     res.send({
@@ -267,8 +266,8 @@ export default {
             { key: '5', name: '五号楼' },
             { key: '6', name: '六号楼' },
             { key: '7', name: '七号楼' },
-            { key: '8', name: '八号楼' }
-          ]
+            { key: '8', name: '八号楼' },
+          ],
         },
         {
           key: '2',
@@ -281,8 +280,8 @@ export default {
             { key: '5', name: '五号楼' },
             { key: '6', name: '六号楼' },
             { key: '7', name: '七号楼' },
-            { key: '8', name: '八号楼' }
-          ]
+            { key: '8', name: '八号楼' },
+          ],
         },
         {
           key: '3',
@@ -295,11 +294,11 @@ export default {
             { key: '5', name: '五号楼' },
             { key: '6', name: '六号楼' },
             { key: '7', name: '七号楼' },
-            { key: '8', name: '八号楼' }
-          ]
-        }
-      ]
-    })
+            { key: '8', name: '八号楼' },
+          ],
+        },
+      ],
+    });
   },
   'GET /api/query/allProject': (req, res) => {
     res.send({
@@ -307,8 +306,8 @@ export default {
         { projectId: '1', name: '三元朱项目' },
         { projectId: '2', name: '水产养殖' },
         { projectId: '3', name: '果蔬加工' },
-        { projectId: '4', name: '菜博会' }
-      ]
-    })
-  }
-}
+        { projectId: '4', name: '菜博会' },
+      ],
+    });
+  },
+};

@@ -29,26 +29,26 @@ export default class card extends Component {
         <div className={style.top}>
           <Row gutter={10}>
             <Col span={7}>
-              <Statistic title="累计响应次数" value={6} suffix="次" />
+              <Statistic title="Cumulative Response Times" value={6} suffix="Times" />
             </Col>
             <Col span={7}>
-              <Statistic title="累计响应负荷" value={1500} suffix="kW" />
+              <Statistic title="Cumulative Response Load" value={1500} suffix="kW" />
             </Col>
             <Col span={7}>
-              <Statistic title="累计收益" value={36000} suffix="元" />
+              <Statistic title="Accumulated Income" value={36000} suffix="￥" />
             </Col>
           </Row>
         </div>
         <div className={style.buttom}>
           <Row gutter={10}>
             <Col span={7}>
-              <Statistic title="响应负荷完成率" value={'100'} suffix="%" />
+              <Statistic title="Response Load Complate Rate" value={'100'} suffix="%" />
             </Col>
             <Col span={7}>
-              <Statistic title="响应时间有效率" value={'100'} suffix="%" />
+              <Statistic title="Response Load Time Rate" value={'100'} suffix="%" />
             </Col>
             <Col span={7}>
-              <Statistic title="年度完成有效率" value={'100'} suffix="%" />
+              <Statistic title="Completion Efficiency" value={'100'} suffix="%" />
             </Col>
           </Row>
         </div>
