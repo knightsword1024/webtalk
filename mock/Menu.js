@@ -33,7 +33,11 @@ export default {
             name: 'energyAnalysis',
             component: './energyAnalysis',
           },
-
+          {
+            path: '/diagram',
+            name: 'diagram',
+            component: './diagram',
+          },
           {
             component: '404',
           },
@@ -73,7 +77,11 @@ export default {
             name: 'energyAnalysis',
             component: './energyAnalysis',
           },
-
+          {
+            path: '/diagram',
+            name: 'diagram',
+            component: './diagram',
+          },
           {
             component: '404',
           },

@@ -185,7 +185,7 @@ export default class Detail extends Component {
                     </Form.Item>
 
                     <Form.Item label="Responsed Time" name="响应时间">
-                      {/* {value} */ '2020-06-01 12:00-13:00'}
+                      {/* {value} */ '2020-6-1 12:00-13:00'}
                     </Form.Item>
                     <Form.Item label="Subscribed Load" name="认缴负荷">
                       {/* {value} */ '200'}
@@ -196,7 +196,7 @@ export default class Detail extends Component {
                       kW
                     </Form.Item>
                     <Form.Item label="Execute Time" name="执行时间">
-                      {/* {value} */ '2020-06-01 12:00-13:00'}
+                      {/* {value} */ '2020-6-1 12:00-13:00'}
                     </Form.Item>
                     <Form.Item label="Geted Benefit" name="获得收益">
                       {/* {value}元 */ '￥6000'}

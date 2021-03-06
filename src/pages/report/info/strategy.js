@@ -1033,7 +1033,7 @@ export default class Detail extends Component {
             rowKey={record => record.id}
             columns={this.createColumn()}
             dataSource={data}
-            scroll={{ y: 167 }}
+            scroll={{ y: 150 }}
           />
         </Card>
         {modalVisible && (
